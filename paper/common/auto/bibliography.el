@@ -53,6 +53,7 @@
     "iclab"
     "stanford:segmenter"
     "tseng2005conditional"
-    "chang2008optimizing"))
+    "chang2008optimizing"
+    "darer2018automated"))
  :bibtex)
 
