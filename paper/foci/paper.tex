@@ -1,0 +1,143 @@
+\documentclass[twocolumn,10pt]{confpaper}
+\usepackage{usenix,epsfig,url,amssymb,CJKutf8}
+\usepackage{balance}
+\usepackage{titling}
+\begin{document}
+
+
+%make title bold and 14 pt font (Latex default is non-bold, 16 pt)
+
+\title{\fontsize{14}{14} \textbf{CensorSeeker: Generating a Large, \\ Culture-Specific Blocklist for China}}
+\date{}
+%for single author (just remove % characters)
+\author{
+{\rm Austin Hounsel}\\
+Princeton University
+\and
+{\rm Prateek Mittal}\\
+Princeton University
+\and
+{\rm Nick Feamster}\\
+Princeton University
+% copy the following lines to add more authors
+% \and
+% {\rm Name}\\
+%Name Institution
+} % End author
+
+\posttitle{\par\end{center}}
+\setlength{\droptitle}{-10pt}
+\maketitle
+
+% Use the following at camera-ready time to suppress page numbers.
+% Comment it out when you first submit the paper for review.
+\thispagestyle{empty}
+
+
+\input{abstract}
+\input{introduction}
+\input{related}
+\input{approach}
+\input{evaluation}
+\input{results}
+
+% \section{Discussion}
+% There are several possible explanations for why CensorSeeker didn't find
+% more censored domains than FilteredWeb. Our use of phrases as search
+% terms tended to return websites that cover particular issues, and
+% these websites may not as heavily censored by the Chinese
+% government. This could mean that either a) the censors just aren't
+% aware of many of the non-censored domains we found, or b) the censors
+% are more concerned about major media outlets and Western
+% websites. However, we can't be sure of either of these hypotheses
+% without insider knowledge of how websites are chosen to be censored in
+% China.
+
+% Nonetheless, we could combine our results with Darer's results
+% to create the largest publicly-available block list for China. Such a
+% contribution would be valuable to researchers that are interested in
+% understanding socio-political trends that drive censorship in China.
+
+% \section{Limitations}
+% A significant limitation of our work is our method for extracting significant
+% terms and phrases from webpages. As previously discussed, we use TF-IDF to
+% determine which terms are most signicicant on a given webpage. We ignore
+% stopwords that don't provide significant information on their own, e.g. ``and'',
+% ``of'', and ``the''. However, our algorithm still extracted a siginificant
+% number of Chinese tags that were not very useful, such as dates and times. We believe
+% this occurs on websites that have a significant amount of text that can't be
+% found in the corpus. In such a case, the algorithm is foced to choose less
+% significant that can be found in the corpus. One way to get around this is to
+% find a larger corpus for Chinese text, but to our knowledge, the Google N-grams
+% corpus is the largest publicly-available corpus.
+
+% Another limitation of CensorSeeker is its reliance on the top 50 search
+% results returned by Bing from each search. For many searches, popular
+% websites like Wikipedia, Yahoo, and Wenxuecity appeared over and over
+% again in the search results. Although the phrases that we extracted
+% from these websites were helpful in discovering more censored
+% websites, these three domains in particular dominated our search
+% results. As such, we may have discovered more censored websites by
+% skipping over the top 50 search results. This would be an interesting
+% direction for future work.
+
+% Lastly, CensorSeeker only tests if URLs are blocked at the domain level. We do not
+% test to see if individual URLs under a given domain are blocked through IP
+% filtering or deep-packet inspection. While our results are interesting on their
+% own in that we discovered a significant amount of censored domains, we may be
+% missing URLs that are not blocked at the domain level but are nonetheless
+% censored through other methods. If we were able to perform such a fine-grained
+% analysis, we would have a more precise understanding of what content is
+% considered sensitive in China.
+
+
+% \section{Future work}
+% It would be interesting to test each censored domain on real resolvers located
+% in China to determine whether or not they are only censored in certain
+% regions. Previous work has shown that censorship in China seems to differ among
+% regions, suggesting that it may be a rather decentralized operation among
+% ISPs~\cite{pearce:global}. For example, the Chinese government might tell ISPs
+% to filter out certain \textit{categories} of websites, e.g. Tibetan news, but
+% they also might leave it up to the ISPs to determine amongst themselves which
+% \textit{websites} should be censored. As such, it would be interesting to identify
+% resolvers in different regions in China and test our set of censored domains
+% against each resolver.
+
+% Furthermore, we could incorporate Iris into CensorSeeker to account for different
+% forms of manipulation. Our method of evaluation follows that of FilteredWeb
+% in that we query domains against Chinese IPs that do not actually belong to
+% resolvers. If we get actually get a response back from the IP, then we know that
+% our query was poisoned along the way. However, there may be more subtle forms of
+% manipulation happening once our request reaches China. For example, we could
+% look at the time-to-live information from each DNS response to infer
+% if requests are going through the same middleboxes.
+
+% We could also repeat this experiment to measure censorship in
+% Russia. This may prove challenging given that we don't have a
+% tokenizer for Russian phrases. Nonetheless, we think that we could
+% still get good results by naiively tokenizing Russian text around
+% spaces and punctuation. Our goal would be to to show that CensorSeeker
+% performs in different countries and different languages.
+
+% Lastly, we could reach out to the maintainers of censorship
+% measurement platforms like OONI and ICLab to continously test these
+% domains over time. Some websites may become uncensored over time, and
+% it would be interesting to have a number of volunteers that could
+% measure such a phenomenon against our dataset. This may prove
+% challenging given that platforms like OONI require websites that are
+% tested to be vetted as legitimate and non-malicious; we have a lot of
+% domains that would need to be manually vetted. Nonetheless, if this
+% could be done, we could have a more complete understanding of how
+% censorship changes over time.
+
+\balance\input{conclusion}
+% \input{acks}
+
+\newpage
+
+{\footnotesize
+ \bibliographystyle{acm}
+ \balance\bibliography{../common/bibliography}}
+
+
+\end{document}

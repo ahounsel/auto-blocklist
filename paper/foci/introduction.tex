@@ -1,0 +1,100 @@
+
+\section{Introduction} 
+
+Internet censorship is pervasive in China. Topics ranging from political
+dissent and religious assembly to privacy-enhancing technologies are known to
+be censored. Naturally, the list of sites that are filtered are not
+public~\cite{fhouse:china}. When performing measurements of Internet
+filtering, the inability to know what sites are blocked creates a circular
+problem of discovering the sites to measure in the first place. To do so, various
+third parties currently curate
+lists of websites that are known to be censored, or ``block lists''. These
+lists are used to both understand {what} content is censored in China and
+how that censorship is implemented.
+
+Instead of curating a block list by hand, Darer et al. proposed a
+system called FilteredWeb that automatically discovers webpages that
+are censored in China~\cite{darer2017filteredweb}. Their approach is
+summarized in the following steps. First, keywords are extracted from
+webpages on the Citizen Lab block list, a small, hand-curated
+list. These are English words that are ranked through TF-IDF, a
+technique which we describe in Section ~\ref{tf-idf}. Then, each
+keyword is used as a query for a search engine, such as Bing. The
+intuition is that censored webpages contain similar keywords. Finally,
+each webpage that appears in the search results is tested for DNS
+manipulation in China. These tests are performed by sending DNS
+queries to IP addresses in China that don't belong to DNS servers. If
+a DNS response is received, then, it is inferred that the request was
+intercepted in China, which implies that the website is censored. Each
+webpage that is censored is fed back to the beginning of the
+system. FilteredWeb discovered 1,355 censored domains, 759 of which
+are outside the Alexa Top 1,000.
+
+In this paper, we build upon the approach of FilteredWeb in the
+following ways. First, {\em CensorSeeker extracts content-rich phrases
+for search queries}. In contrast, FilteredWeb only uses single words
+for search queries. These phrases provide greater context regarding
+the subject of censored webpages, which enables us to find websites
+that are very closely related to each other. For example, consider the
+phrase \begin{CJK*}{UTF8}{gbsn}中国侵犯人权 \end{CJK*} (Chinese human
+rights violation). When we perform the searches \texttt{Chinese},
+\texttt{human}, \texttt{rights} , and \texttt{violation}
+independently, we mainly get websites for Western media outlets, many
+of which are known to be censored in China. By contrast, if we search
+for [\texttt{Chinese human rights violation}] as a single phrase, then
+we discover a significant number of websites related to Chinese
+culture, such as homepages for activist groups in China and
+Taiwan. Identifying and extracting such key phrases is a non-trivial
+task, as we discuss later.
+
+Second, CensorSeeker uses natural language processing to parse Chinese text
+when adding to the blocklist. In contrast, FilteredWeb only extracts English
+words that appear on a webpage. As such, \textit{any website that is written
+in simplified Chinese is ignored}, neglecting a significant portion of
+censored sites. For example, there are many censored websites and blogs that
+cover Chinese news and culture, and many of them only contain Chinese text. As
+such, to discover region-specific, censored websites, such a system should be
+able to parse Chinese text. Because Chinese is typically written without
+spaces separating words, this requires the use of natural-language processing
+tools.
+
+Third, we make our block list public, in contrast to previous work. The
+authors of FilteredWeb made their block list available to us for validation;
+we have published our block list so others can build on
+it~\cite{censorsearch-lists}.
+
+In summary, we built and now maintain a large, public, culture-specific list
+of websites that are censored in China. These websites cover topics such as
+political dissent, historical events pertaining to the Chinese Communist
+Party, Tibetan rights, religious freedom, and more. Furthermore, because many
+of these website are written from the perspective of Chinese nationals and expatriates,
+we are able to get first-hand accounts of Chinese culture that are
+not present in other block lists. This new resource can help researchers who
+are interested in studying Chinese censorship from the perspective of
+marginalized groups that most affected by it.
+
+In this paper, we make the following contributions:
+\begin{itemize}
+  \item We develop CensorSeeker, a system that
+can discover censored websites in China that specifically pertain to
+its culture. We do so by extracting potentially sensitive Chinese
+phrases from censored webpages and using them as search terms to find
+related websites.
+  \item We use CensorSeeker to build a list of 757 censored domains
+in China, which is 8.5$\times$ larger than the standard list for censorship
+measurements~\cite{citizenlab:block}. Furthermore, \textit{none of
+these websites are on the largest block list
+available}~\cite{darer2017filteredweb}.
+  \item We perform a qualitative analysis of our block list to
+    showcase its advantages over previous work.
+\end{itemize}
+
+The rest of the paper proceeds as follows. First, we describe our
+approach to building a large, culture-specific block list for
+China. This includes an in-depth analysis of the advantages of our
+system over previous work. Then, we describe two large-scale
+evaluations of our system that we performed. Each of these evaluations
+produced qualitatively different results due to different
+configurations of our system. Finally, we conclude
+with a discussion of how the block list we built could be used by
+researchers. We also briefly explore directions for future work.

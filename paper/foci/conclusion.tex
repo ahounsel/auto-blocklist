@@ -1,0 +1,30 @@
+
+\section{Conclusion}
+We built a block list of 757 censored websites in China that are not
+present on the largest block
+list~\cite{darer2017filteredweb}. Furthermore, our list is 8.5$\times$
+larger than the most widely used block
+list~\cite{citizenlab:block}. It contains human rights organizations,
+minority news outlets, religious blogs, political dissent groups,
+privacy-enhancing technology providers, and more. We've open-sourced
+our source code and block list on GitHub with the GPL
+license~\cite{censorsearch-lists}.
+
+Automatically detecting which websites are censored in a given country is an
+open problem. Systems like CensorSeeker and FilteredWeb are both steps in the
+right direction, but there is more work to be done.  One way of improving
+CensorSeeker would be to experiment with advanced natural-language processing
+techniques to identify better search terms. For example, we could try using
+Stanford CoreNLP's part-of-speech tagger to identify phrases that describe
+some action against the Chinese government. This approach might
+identify the following phrase: ``Chinese citizens protest against the Communist Party on June
+4th''. We believe that using such culture-specific phrases as search terms
+would enable us to discover even more websites that are censored in China.
+
+% We could also try running CensorSeeker against different search engines to see
+% if we get different result sets. It might be the case that one search engine
+% is able to find more censored websites than the others. It might also be the
+% case that one search engine is better at finding culture-specific websites
+% than the others. To our knowledge, Bing is the only search engine that
+% provides a public API, so we would have to coordinate with other search
+% engines to make this happen.

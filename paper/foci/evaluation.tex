@@ -1,0 +1,40 @@
+
+
+\section{Evaluation}
+
+We performed a large-scale evaluation of CensorSeeker to
+discover region-specific websites that are censored in China.  We
+began by seeding CensorSeeker with the Citizen Lab block list, which is
+the most widely used list by censorship researchers. The list contains
+220 webpages that either are blocked or have been alleged to be blocked in
+the past. Since CensorSeeker only extracts phrases from webpages that are
+currently censored, we began by testing each webpage on the block list for
+censorship. This left us with 108 unique webpages and 85 domains.
+
+From November 11th, 2017 to January 9th, 2018, we used Bing's Search
+API to search for websites related to known censored
+websites~\cite{microsoft:bing}. According to the API, each call can
+return at most 50 search results. Since it would be expensive to
+perform multiple API calls for each search term, we limited ourselves
+to one API call, i.e. 50 search results, per search term. For 
+each website in the search results, we tested for censorship by
+sending a DNS request to a set of controlled IP addresses in China
+that don't belong to DNS servers. As with FilteredWeb, if we
+received a DNS response, we inferred that the DNS request was
+intercepted, and thus the tested website is
+censored~\cite{darer2017filteredweb}. Finally, we performed two
+separate evaluations to measure the effectiveness of different phrase
+sizes for finding censored websites. In the first evaluation, we only
+extracted bigrams of words, and in the second one we only extracted
+trigrams.
+
+We also configured the Bing API calls so that any URLs from Blogspot,
+Facebook, Twitter, YouTube, and Tumblr would be ignored. We did this
+for a couple of reasons. For one, these websites are widely known to
+be censored in China, so we would not be providing new information by
+having these websites or their subdomains in our result
+set. Furthermore, Tumblr and Blogspot assign a unique subdomain to
+each user's blog, and in some cases we'd get a dozen blogs from a
+single search query. In order to find culture-specific websites that
+are normally buried by the top 50 search results, then, we need to
+omit these blogs.
