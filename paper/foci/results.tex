@@ -1,6 +1,6 @@
 \section{Results}
 We reached several key insights from performing our
-evaluations. First, our system was able to discover hundreds of
+evaluations. First, we were able to discover hundreds of
 censored websites that are not present on existing block
 lists. Furthermore, we noticed that many websites on our block list
 receive very little traffic. Lastly, we found that by using
@@ -31,8 +31,9 @@ section discusses the main findings in depth.
 \caption{\label{breakdown} Total number of censored domains discovered.}
 \end{table}
 
-\textit{Our system discovered hundreds of censored websites that are
-not present on the Citizen Lab block list--the standard for censorship
+\textit{By using natural-language processing on Chinese webpages, we
+were able to discover hundreds of censored websites that are not
+present on the Citizen Lab block list--the standard for censorship
 measurements--and FilteredWeb's block list~\cite{darer2017filteredweb,
 citizenlab:block}}. Furthermore, the set of websites that appeared the
 most in our search results is almost entirely different from that of
@@ -45,11 +46,11 @@ For instance, \texttt{hrw.org} exposes a number of humans rights
 issues in China, including the persecution of the Ugyhur minority
 group~\cite{hrw:uighur}. Additionally, the \texttt{twreporter.org}
 covers Taiwanese news, which may seem like an innocuous website to
-Westerners. However, the relationship between Taiwan and China is so
+Westerners. However, the relationship between Taiwan and China is
 strained to the point that the Chinese government has attempted to
-silence logistics regarding Taiwan~\cite{wapo:taiwan}. As such, the
-censorship of these popular websites might reflects China's domestic
-and foreign policy.
+silence news outlets that report on Taiwan as its own
+country~\cite{wapo:taiwan}. As such, the censorship of these popular
+websites might reflect China's domestic and foreign policy.
 
 Finally, only three of the top 25 domains that we discovered are in
 the top 50 domain list produced by FilteredWeb. Four of the top five
@@ -57,11 +58,11 @@ domains that we discovered--\texttt{www.storm.mg},
 \texttt{www.plurk.com}, \texttt{buzzorange.com}, and
 \texttt{www.hk01.com}--are non-Western media websites that cover
 Chinese news. These websites were also not present in the list of top
-50 domains discovered by FilteredWeb. \textit{Thus, CensorSeeker is
-able to product a qualitatively different block list than that of
-FilteredWeb}. We recommend putting these two block lists together to
-create a single block list that is both wide in scope and large in
-size.
+50 domains discovered by FilteredWeb. \textit{Thus, by building on the
+approach of FilteredWeb, we were able to produce a qualitatively
+different block list}. We recommend putting these two block lists
+together to create a single block list that is both wide in scope and
+large in size.
 
 \begin{figure*}[t]
   \centering
@@ -91,7 +92,7 @@ discover censored websites, it's unlikely that the public would even
 be aware that these websites are blocked.
 
 Furthermore, we were able to consistently discover \textit{more} unpopular
-censored domains with CensorSeeker than FilteredWeb. For domains that
+censored domains with our approach than FilteredWeb. For domains that
 rank between 200,000 and 300,000 on the Alexa Top 1,000,000,
 FilteredWeb was able to discover more domains, but in every other bin of
 100,000 ranks we discovered more. Notably, between the ranks of 900,000

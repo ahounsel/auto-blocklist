@@ -31,7 +31,7 @@ system. FilteredWeb discovered 1,355 censored domains, 759 of which
 are outside the Alexa Top 1,000.
 
 In this paper, we build upon the approach of FilteredWeb in the
-following ways. First, {\em CensorSeeker extracts content-rich phrases
+following ways. First, {\em we extract content-rich phrases
 for search queries}. In contrast, FilteredWeb only uses single words
 for search queries. These phrases provide greater context regarding
 the subject of censored webpages, which enables us to find websites
@@ -47,7 +47,7 @@ culture, such as homepages for activist groups in China and
 Taiwan. Identifying and extracting such key phrases is a non-trivial
 task, as we discuss later.
 
-Second, CensorSeeker uses natural language processing to parse Chinese text
+Second, we use natural language processing to parse Chinese text
 when adding to the blocklist. In contrast, FilteredWeb only extracts English
 words that appear on a webpage. As such, \textit{any website that is written
 in simplified Chinese is ignored}, neglecting a significant portion of
@@ -75,13 +75,12 @@ marginalized groups that most affected by it.
 
 In this paper, we make the following contributions:
 \begin{itemize}
-  \item We develop CensorSeeker, a system that
-can discover censored websites in China that specifically pertain to
-its culture. We do so by extracting potentially sensitive Chinese
-phrases from censored webpages and using them as search terms to find
-related websites.
-  \item We use CensorSeeker to build a list of 757 censored domains
-in China, which is 8.5$\times$ larger than the standard list for censorship
+  \item We build upon the approach of FilteredWeb to discover censored
+websites in China that specifically pertain to its culture. We do so
+by extracting potentially sensitive Chinese phrases from censored
+webpages and using them as search terms to find related websites.
+  \item We build a list of 757 censored domains in China, which is
+8.5$\times$ larger than the standard list for censorship
 measurements~\cite{citizenlab:block}. Furthermore, \textit{none of
 these websites are on the largest block list
 available}~\cite{darer2017filteredweb}.
@@ -92,8 +91,8 @@ available}~\cite{darer2017filteredweb}.
 The rest of the paper proceeds as follows. First, we describe our
 approach to building a large, culture-specific block list for
 China. This includes an in-depth analysis of the advantages of our
-system over previous work. Then, we describe two large-scale
-evaluations of our system that we performed. Each of these evaluations
+approach over previous work. Then, we describe two large-scale
+evaluations that we performed. Each of these evaluations
 produced qualitatively different results due to different
 configurations of our system. Finally, we conclude
 with a discussion of how the block list we built could be used by

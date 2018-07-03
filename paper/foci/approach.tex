@@ -3,20 +3,20 @@
 \begin{figure}[t]
   \centering
   \includegraphics[scale=0.23]{figures/arch-2}
-  \caption{\label{arch}CensorSeeker approach.}
+  \caption{\label{arch}Our approach for discovering censored websites.}
 \end{figure}
 
-Figure~\ref{arch} summarizes CensorSeeker's approach to finding censored
-websites. For the most part, CensorSeeker is similar to
-FilteredWeb~\cite{darer2017filteredweb}. We start by bootstrapping a list of
-webpages that are known to be censored, such as the Citizen Lab block
-list~\cite{citizenlab:block}.
-Then, we extract Chinese and English phrases that characterize these webpages.
-Then, we use these phrases as search queries to find related webpages that
-might also be censored. Finally, we test each search result for DNS
-manipulation in China and feed the censored webpages back to the beginning of
-the system. The rest of this section details the new capabilities of
-CensorSeeker beyond the state of the art.
+Figure~\ref{arch} summarizes our approach to finding censored
+websites. For the most part, our approach is similar to that of
+FilteredWeb~\cite{darer2017filteredweb}. We start by bootstrapping a
+list of webpages that are known to be censored, such as the Citizen
+Lab block list~\cite{citizenlab:block}.  Then, we extract Chinese and
+English phrases that characterize these webpages.  Then, we use these
+phrases as search queries to find related webpages that might also be
+censored. Finally, we test each search result for DNS manipulation in
+China and feed the censored webpages back to the beginning of the
+system. The rest of this section details the new capabilities of our
+approach beyond the state of the art.
 
 \subsection{Extracting multi-word phrases}
 An n-gram is a building block for natural-language processing that
