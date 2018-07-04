@@ -22,8 +22,8 @@ from results import *
 DB_NAME = 'db/unigrams.db'
 KEYS = 'KEYS'
 
-THREADS = 1
-PROCESSES = 1
+THREADS = 32
+PROCESSES = 16
 
 url_queue = multiprocessing.Queue()
 tag_queue = multiprocessing.Queue()
@@ -163,6 +163,7 @@ def censor_consumer(itr):
 
 
 def tag_producer(censored_urls, itr):
+    print(len(censored_urls))
     for row in censored_urls:
         url = row[0]
         try:
@@ -328,12 +329,10 @@ def part_two(itr):
     c = conn.cursor()
     censored_urls = c.execute(('select * from urls where ' +
                                'censored=1 and iteration=?'), (itr,)).fetchall()
-    censored_urls = censored_urls[:10]
-    print('# of censored URLs to extract tags from:', len(censored_urls))
     conn.close()
 
-    block_size = int(15000/PROCESSES)
-    blocks = [censored_urls[i:i + block_size] for i in range(0, 15000, block_size)]
+    block_size = int(len(censored_urls)/PROCESSES)
+    blocks = [censored_urls[i:i + block_size] for i in range(0, len(censored_urls), block_size)]
     args = [(block, itr) for block in blocks]
     pool = multiprocessing.Pool(PROCESSES)
     pool.starmap(tag_producer, args)

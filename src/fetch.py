@@ -32,7 +32,6 @@ def fetch_grams(url):
     "Fetch a webpage and return the text as unigrams and bigrams"
 
     sttok = CoreNLPTokenizer('http://localhost:9001')
-    print(url)
     try:
         r = requests.get(url, timeout=5)
     except:
