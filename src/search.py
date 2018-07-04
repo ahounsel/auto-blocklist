@@ -329,6 +329,7 @@ def part_two(itr):
     c = conn.cursor()
     censored_urls = c.execute(('select * from urls where ' +
                                'censored=1 and iteration=?'), (itr,)).fetchall()
+    censored_urls = censored_urls[:16]
     conn.close()
 
     block_size = int(len(censored_urls)/PROCESSES)
@@ -351,7 +352,7 @@ def part_three(itr, keys):
 
     block_size = int(len(unused_tags)/PROCESSES)
     blocks = [unused_tags[i:i + block_size] for i in range(0, len(unused_tags), block_size)]
-    args = [(block, itr) for block in blocks]
+    args = [(block, itr, keys) for block in blocks]
     pool = multiprocessing.Pool(PROCESSES)
     pool.starmap(url_producer, args)
     url_consumer()
@@ -363,7 +364,7 @@ def find_censored_urls(keys):
     for i in range(0,1):
         itr = i
         print('Itr %d' % itr)
-        part_two(itr)
+        # part_two(itr)
         part_three(itr, keys)
         part_one(itr+1)
 
