@@ -17,13 +17,13 @@ from fetch import *
 from results import *
 
 
-#DB_NAME = 'bigrams.db'
-# DB_NAME = 'trigrams.db'
-DB_NAME = 'unigrans.db'
+#DB_NAME = 'db/bigrams.db'
+# DB_NAME = 'db/trigrams.db'
+DB_NAME = 'db/unigrams.db'
 KEYS = 'KEYS'
 
-THREADS = 64
-PROCESSES = 8
+THREADS = 1
+PROCESSES = 1
 
 url_queue = multiprocessing.Queue()
 tag_queue = multiprocessing.Queue()
@@ -166,9 +166,9 @@ def tag_producer(censored_urls, itr):
     for row in censored_urls:
         url = row[0]
         try:
-            # unigrams = 0
+            unigrams = 0
             # bigrams = 0
-            trigrams = 0
+            # trigrams = 0
             tags = []
             grams = fetch_grams(url)
             unigram_tags = tf_idf(grams[0], 1)
@@ -328,6 +328,7 @@ def part_two(itr):
     c = conn.cursor()
     censored_urls = c.execute(('select * from urls where ' +
                                'censored=1 and iteration=?'), (itr,)).fetchall()
+    censored_urls = censored_urls[:10]
     print('# of censored URLs to extract tags from:', len(censored_urls))
     conn.close()
 
