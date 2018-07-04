@@ -18,7 +18,9 @@ from results import *
 
 
 #DB_NAME = 'bigrams.db'
-DB_NAME = 'trigrams.db'
+# DB_NAME = 'trigrams.db'
+DB_NAME = 'unigrans.db'
+KEYS = 'KEYS'
 
 THREADS = 64
 PROCESSES = 8
@@ -26,6 +28,16 @@ PROCESSES = 8
 url_queue = multiprocessing.Queue()
 tag_queue = multiprocessing.Queue()
 censored_queue = multiprocessing.Queue()
+
+
+def read_keys(keys_filename):
+    try:
+        with open(keys_filename) as keys_file:
+            keys = json.load(keys_file)
+            return keys
+    except IOError as err:
+        print(err)
+        exit(-1)
 
 
 def call_api(url, headers, params):
@@ -41,31 +53,31 @@ def call_api(url, headers, params):
     return r
 
     
-def translate_to_cn(term):
+def translate_to_cn(term, translator_keys):
     "Translate a term from English to Chinese"
 
     params = {'from': 'en',
               'to': 'zh'}
     
     params['text'] = term
-    payload = call_api(TRANSLATOR_URL, TRANSLATOR_HEADERS, params)
+    payload = call_api(translator_keys["url"], translator_keys["headers"], params)
     translation = ElementTree.fromstring(payload.text).text
     return translation
 
 
-def translate_to_en(term):
+def translate_to_en(term, translator_keys):
     "Translate a term from Chinese to English"
 
     params = {'from': 'zh',
               'to': 'en'}
     
     params['text'] = term
-    payload = call_api(TRANSLATOR_URL, TRANSLATOR_HEADERS, params)
+    payload = call_api(translator_keys["url"], translator_keys["headers"], params)
     translation = ElementTree.fromstring(payload.text).text
     return translation
 
         
-def search(tag):
+def search(tag, search_keys):
     "Use a tag to search for candidate"
 
     if tag is None:
@@ -79,7 +91,7 @@ def search(tag):
                        + ' NOT (site:blogspot.fr) NOT (site:blogspot.jp)'
                        + ' NOT (site:tumblr.com) NOT (site:youtube.com)'
                        + ' NOT (site:facebook.com) NOT (site:twitter.com)')
-    payload = call_api(BING_URL, BING_HEADERS, params).json()
+    payload = call_api(search_keys["url"], search_keys["headers"], params).json()
     if 'webPages' in payload and 'value' in payload['webPages']:
         webpages = payload['webPages']['value']
     else:
@@ -159,19 +171,19 @@ def tag_producer(censored_urls, itr):
             trigrams = 0
             tags = []
             grams = fetch_grams(url)
-            # unigram_tags = tf_idf(grams[0], 1)
+            unigram_tags = tf_idf(grams[0], 1)
             # bigram_tags = tf_idf(grams[1], 2)
-            trigram_tags = tf_idf(grams[2], 3)
-            if trigram_tags[1] is not None and trigrams < MAX_TAGS:        # Chinese trigrams
-                for cn_tag in trigram_tags[1]:
-                    if trigrams < MAX_TAGS:
-                        tags.append(cn_tag)
-                        trigrams += 1
-            if trigram_tags[0] is not None and trigrams < MAX_TAGS:        # English trigrams
-                for en_tag in trigram_tags[0]:
-                    if trigrams < MAX_TAGS:
-                        tags.append(en_tag)
-                        trigrams += 1
+            # trigram_tags = tf_idf(grams[2], 3)
+            # if trigram_tags[1] is not None and trigrams < MAX_TAGS:        # Chinese trigrams
+            #     for cn_tag in trigram_tags[1]:
+            #         if trigrams < MAX_TAGS:
+            #             tags.append(cn_tag)
+            #             trigrams += 1
+            # if trigram_tags[0] is not None and trigrams < MAX_TAGS:        # English trigrams
+            #     for en_tag in trigram_tags[0]:
+            #         if trigrams < MAX_TAGS:
+            #             tags.append(en_tag)
+            #             trigrams += 1
             # if bigram_tags[1] is not None and bigrams < MAX_TAGS:        # Chinese bigrams
             #     for cn_tag in bigram_tags[1]:
             #         if bigrams < MAX_TAGS:
@@ -182,16 +194,16 @@ def tag_producer(censored_urls, itr):
             #         if bigrams < MAX_TAGS:
             #             tags.append(en_tag)
             #             bigrams += 1
-            # if unigram_tags[1] is not None:        # Chinese unigrams
-            #     for cn_tag in unigram_tags[1]:
-            #         if unigrams < MAX_TAGS:
-            #             tags.append(cn_tag)
-            #             unigrams += 1
-            # if unigram_tags[0] is not None:        # English unigrams
-            #     for en_tag in unigram_tags[0]:
-            #         if unigrams < MAX_TAGS:
-            #             tags.append(en_tag)
-            #             unigrams += 1
+            if unigram_tags[1] is not None:        # Chinese unigrams
+                for cn_tag in unigram_tags[1]:
+                    if unigrams < MAX_TAGS:
+                        tags.append(cn_tag)
+                        unigrams += 1
+            if unigram_tags[0] is not None:        # English unigrams
+                for en_tag in unigram_tags[0]:
+                    if unigrams < MAX_TAGS:
+                        tags.append(en_tag)
+                        unigrams += 1
             print(url, tags)
             vals = (url, tags, itr)
             tag_queue.put(vals)
@@ -228,7 +240,7 @@ def tag_consumer():
     conn.close()
     
 
-def url_producer(unused_tags, itr):
+def url_producer(unused_tags, itr, keys):
     "For each tag, search for candidate URLs"
 
     for row in unused_tags:
@@ -236,10 +248,10 @@ def url_producer(unused_tags, itr):
             tag = row[0]
             print(tag)
             if isEnglish(tag):
-                translated_tag = translate_to_cn(tag)
-                search_results = search(translated_tag)
+                translated_tag = translate_to_cn(tag, keys["translator_info"])
+                search_results = search(translated_tag, keys["search_info"])
             else:
-                search_results = search(tag)
+                search_results = search(tag, keys["search_info"])
 
             for result in search_results:
                 url = result['url']
@@ -327,7 +339,7 @@ def part_two(itr):
     tag_consumer()
 
     
-def part_three(itr):
+def part_three(itr, keys):
     "Search for candidate URLs using newly extracted tags"
 
     conn = sqlite3.connect(DB_NAME)
@@ -345,20 +357,21 @@ def part_three(itr):
     url_consumer()
     
         
-def find_censored_urls():
+def find_censored_urls(keys):
     "Use seeded URLs to search for censored webpages"
 
-    for i in range(7,8):
+    for i in range(0,1):
         itr = i
         print('Itr %d' % itr)
         part_two(itr)
-        part_three(itr)
+        part_three(itr, keys)
         part_one(itr+1)
 
 
 if __name__ == "__main__":
+    keys = read_keys(KEYS)
     start = time.time()
-    find_censored_urls()
-    count_results('trigrams.db')
+    find_censored_urls(keys)
+    seeker.count_results('unigrams.db')
     end = time.time()
     print(end - start)
