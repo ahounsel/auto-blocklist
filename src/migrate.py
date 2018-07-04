@@ -5,9 +5,9 @@ from search import *
 from urllib.parse import urlparse
 
 
-#DB_NAME = 'censor-search.db'
-#DB_NAME = 'bigrams.db'
-DB_NAME = 'test.db'
+#DB_NAME = 'db/censor-search.db'
+#DB_NAME = 'db/bigrams.db'
+DB_NAME = 'db/unigrams.db'
 
 
 def create_tables():
@@ -85,21 +85,21 @@ def migrate():
     conn.close()
 
 
-def init_test_db():
-    conn_cs = sqlite3.connect('censor-search.db')
-    conn_test = sqlite3.connect(DB_NAME)
-    cur_cs = conn_cs.cursor()
-    cur_test = conn_test.cursor()
+def init_db():
+    conn_old = sqlite3.connect('db/censor-search.db')
+    conn_new = sqlite3.connect(DB_NAME)
+    cur_old = conn_old.cursor()
+    cur_new = conn_new.cursor()
 
-    rows = cur_cs.execute(('select * from urls where iteration=0 ' +
+    rows = cur_old.execute(('select * from urls where iteration=0 ' +
                            'and censored=1')).fetchall()
     for row in rows:
         vals = row + ("N/A",)
-        cur_test.execute('insert into urls values (?,?,?,?,?,?)', vals)
+        cur_new.execute('insert into urls values (?,?,?,?,?,?)', vals)
         print(vals)
-    conn_test.commit()
-    conn_test.close()
-    conn_cs.close()
+    conn_new.commit()
+    conn_new.close()
+    conn_old.close()
 
 
 def migrate_itr5_urls():
@@ -121,8 +121,4 @@ def migrate_itr5_urls():
     
 
 if __name__ == "__main__":
-     drop_tables()
-     create_tables()
-#     migrate()
-     init_test_db()
-#    migrate_itr5_urls()
+     init_db()
