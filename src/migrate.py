@@ -121,4 +121,6 @@ def migrate_itr5_urls():
     
 
 if __name__ == "__main__":
-     init_db()
+    drop_tables()
+    create_tables()
+    init_db()

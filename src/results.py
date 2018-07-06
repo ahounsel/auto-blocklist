@@ -4,13 +4,13 @@ import tldextract
 import sqlite3
 
 
-BASE_DIR = '/Users/ahounsel/git/censor-search/'
+BASE_DIR = '/home/ahounsel/git/censor-seeker/'
 
 
 def count_new_domains(itr):
     "Count the amount of new censored domains found"
 
-    conn = sqlite3.connect(BASE_DIR + DB_NAME)
+    conn = sqlite3.connect(BASE_DIR + 'src/db/' + DB_NAME)
     c = conn.cursor()
 
     rows = c.execute(('select distinct domain from urls where censored=1 ' +
@@ -26,7 +26,8 @@ def count_new_domains(itr):
 
 
 def get_results(db, maxRows):
-    conn = sqlite3.connect(BASE_DIR + 'src/' + db)
+    print(BASE_DIR + 'src/db/' + db)
+    conn = sqlite3.connect(BASE_DIR + 'src/db/' + db)
     c = conn.cursor()
 
     rows = c.execute('select distinct domain from urls where censored=1 '
@@ -37,7 +38,7 @@ def get_results(db, maxRows):
     # Load Alexa Top 1000 domains
     top_1000 = []
     i = 0
-    with open (BASE_DIR + 'lists/top-1m.csv', 'r') as csvfile:
+    with open (BASE_DIR + 'lists/alexa.csv', 'r') as csvfile:
         csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in csvreader:
             if i < 1000:
@@ -64,8 +65,8 @@ def get_results(db, maxRows):
 
 
 def get_unique_urls(maxRows):
-    bigram_conn = sqlite3.connect(BASE_DIR + 'src/' + 'bigrams.db')
-    trigram_conn = sqlite3.connect(BASE_DIR + 'src/' + 'trigrams.db')
+    bigram_conn = sqlite3.connect(BASE_DIR + 'src/db/' + 'bigrams.db')
+    trigram_conn = sqlite3.connect(BASE_DIR + 'src/db/' + 'trigrams.db')
     bigram_cursor = bigram_conn.cursor()
     trigram_cursor = trigram_conn.cursor()
 
@@ -92,10 +93,15 @@ def compare_results(db):
 
      
 if __name__ == "__main__":
+    unigram_results = sorted(compare_results('unigrams.db'))
     bigram_results = sorted(compare_results('bigrams.db'))
     trigram_results = sorted(compare_results('trigrams.db'))
-    total_results = sorted(set(bigram_results) | set(trigram_results))
+    total_results = sorted(set(unigram_results) | set(bigram_results) | set(trigram_results))
     print('Total # of censored domains discovered:', len(total_results))
+
+    with open('unigram_list.txt', 'w') as blocklist:
+        for domain in unigram_results:
+            blocklist.write(domain + '\n')
 
     with open('bigram_list.txt', 'w') as blocklist:
         for domain in bigram_results:

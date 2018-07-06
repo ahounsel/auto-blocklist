@@ -22,8 +22,8 @@ from results import *
 DB_NAME = 'db/unigrams.db'
 KEYS = 'KEYS'
 
-THREADS = 32
-PROCESSES = 16
+THREADS = 4
+PROCESSES = 32
 
 url_queue = multiprocessing.Queue()
 tag_queue = multiprocessing.Queue()
@@ -329,7 +329,6 @@ def part_two(itr):
     c = conn.cursor()
     censored_urls = c.execute(('select * from urls where ' +
                                'censored=1 and iteration=?'), (itr,)).fetchall()
-    censored_urls = censored_urls[:16]
     conn.close()
 
     block_size = int(len(censored_urls)/PROCESSES)
@@ -364,7 +363,7 @@ def find_censored_urls(keys):
     for i in range(0,1):
         itr = i
         print('Itr %d' % itr)
-        # part_two(itr)
+        part_two(itr)
         part_three(itr, keys)
         part_one(itr+1)
 
@@ -373,6 +372,5 @@ if __name__ == "__main__":
     keys = read_keys(KEYS)
     start = time.time()
     find_censored_urls(keys)
-    seeker.count_results('unigrams.db')
     end = time.time()
     print(end - start)
