@@ -7,10 +7,10 @@ import sqlite3
 BASE_DIR = '/home/ahounsel/git/censor-seeker/'
 
 
-def count_new_domains(itr):
+def count_new_domains(itr, db):
     "Count the amount of new censored domains found"
 
-    conn = sqlite3.connect(BASE_DIR + 'src/db/' + DB_NAME)
+    conn = sqlite3.connect(BASE_DIR + 'src/db/' + db)
     c = conn.cursor()
 
     rows = c.execute(('select distinct domain from urls where censored=1 ' +

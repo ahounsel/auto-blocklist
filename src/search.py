@@ -22,7 +22,7 @@ from results import *
 DB_NAME = 'db/unigrams.db'
 KEYS = 'KEYS'
 
-THREADS = 4
+THREADS = 32
 PROCESSES = 32
 
 url_queue = multiprocessing.Queue()
@@ -360,7 +360,7 @@ def part_three(itr, keys):
 def find_censored_urls(keys):
     "Use seeded URLs to search for censored webpages"
 
-    for i in range(0,1):
+    for i in range(1,2):
         itr = i
         print('Itr %d' % itr)
         part_two(itr)
