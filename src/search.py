@@ -360,7 +360,7 @@ def part_three(itr, keys):
 def find_censored_urls(keys):
     "Use seeded URLs to search for censored webpages"
 
-    for i in range(1,2):
+    for i in range(2,3):
         itr = i
         print('Itr %d' % itr)
         part_two(itr)
