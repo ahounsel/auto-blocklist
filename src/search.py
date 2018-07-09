@@ -329,6 +329,7 @@ def part_two(itr):
     c = conn.cursor()
     censored_urls = c.execute(('select * from urls where ' +
                                'censored=1 and iteration=?'), (itr,)).fetchall()
+    censored_urls = censored_urls[:2500]
     conn.close()
 
     block_size = int(len(censored_urls)/PROCESSES)
@@ -360,7 +361,7 @@ def part_three(itr, keys):
 def find_censored_urls(keys):
     "Use seeded URLs to search for censored webpages"
 
-    for i in range(2,3):
+    for i in range(3,4):
         itr = i
         print('Itr %d' % itr)
         part_two(itr)
