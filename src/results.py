@@ -4,7 +4,7 @@ import tldextract
 import sqlite3
 
 
-BASE_DIR = '/home/ahounsel/git/censor-seeker/'
+BASE_DIR = '/Users/ahounsel/git/censor-seeker/'
 
 
 def count_new_domains(itr, db):
