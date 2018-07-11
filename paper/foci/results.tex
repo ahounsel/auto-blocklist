@@ -39,27 +39,31 @@ measurements--and FilteredWeb's block list~\cite{darer2017filteredweb,
 citizenlab:block}}. Furthermore, the set of websites that appeared the
 most in our search results is almost entirely different from that of
 FilteredWeb. Figure~\ref{top-domains} breaks down this result when
-using both bigrams and trigrams as search queries. These websites seem
-to mainly cover Chinese human rights issues, news, and political
-content.
+using unigrams, bigrams, and trigrams as search queries. These websites seem
+to mainly cover Chinese human rights issues, news, censorship
+circumvention, and more.
 
-For instance, \texttt{hrw.org} exposes a number of humans rights
-issues in China, including the persecution of the Ugyhur minority
-group~\cite{hrw:uighur}. Additionally, the \texttt{twreporter.org}
-covers Taiwanese news, which may seem like an innocuous website to
-Westerners. However, the relationship between Taiwan and China is
-strained to the point that the Chinese government has attempted to
-silence news outlets that report on Taiwan as its own
-country~\cite{wapo:taiwan}. As such, the censorship of these popular
-websites might reflect China's domestic and foreign policy.
+For instance, \texttt{wiki.zhtube.com} appears to be a Chinese
+Wikipedia mirror. The webpage for \texttt{zhtube.com} seems to be the
+default page for a Chinese LNMP (Linux, NginX MySQL, PhP) installation
+on a virtual private server~\cite{lnmp}. We found over 3000 URLs in
+our dataset that point to this website, which suggests that many
+Chinese websites are trying to circumvent the on-and-off censorship of
+Wikipedia in China~\cite{wikipedia-china}. Furthermore,
+\texttt{blog.boxun.com} is a United States-based outlet for Chinese
+news that relies heavily on anonymous submissions. The owners of the
+website note that ``Boxun often reports news that authorities do not
+tell the public, such as outbreaks of diseases, human rights
+violations, corruption scandals and disasters''~\cite{boxun-about}. As
+such, the censorship of these websites might reflect China's domestic
+and foreign policy.
 
 Finally, only three of the top 25 domains that we discovered are in
 the top 50 domain list produced by FilteredWeb. Four of the top five
-domains that we discovered--\texttt{www.storm.mg},
-\texttt{www.plurk.com}, \texttt{buzzorange.com}, and
-\texttt{www.hk01.com}--are non-Western media websites that cover
-Chinese news. These websites were also not present in the list of top
-50 domains discovered by FilteredWeb. \textit{Thus, by building on the
+domains that we discovered--\texttt{ntdtv.com},
+\texttt{storm.mg}, \texttt{cn.shafaqna.com}, and
+\texttt{thenewslens.com}--are non-Western media websites that cover
+Chinese news. \textit{Thus, by building on the
 approach of FilteredWeb, we were able to produce a qualitatively
 different block list}. We recommend putting these two block lists
 together to create a single block list that is both wide in scope and

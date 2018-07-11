@@ -54,6 +54,9 @@
     "stanford:segmenter"
     "tseng2005conditional"
     "chang2008optimizing"
-    "darer2018automated"))
+    "darer2018automated"
+    "lnmp"
+    "wikipedia-china"
+    "boxun-about"))
  :bibtex)
 
