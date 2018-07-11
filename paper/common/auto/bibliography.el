@@ -57,6 +57,8 @@
     "darer2018automated"
     "lnmp"
     "wikipedia-china"
-    "boxun-about"))
+    "boxun-about"
+    "freedomhouse:falun"
+    "guardian:guo"))
  :bibtex)
 

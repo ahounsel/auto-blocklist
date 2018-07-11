@@ -189,7 +189,7 @@ as a function of unique URLs crawled for each evaluation.
 
 We also wanted to see if there is a correlation between the
 presence of certain phrases and whether or not a given website is
-censored.  For example, if we make a search
+censored, even if we have no ground truth.  For example, if we make a search
 for \begin{CJK*}{UTF8}{gbsn}中国侵犯人权\end{CJK*} (Chinese human
 rights violation) and find that a particular search result is
 censored, then we cannot be certain whether the presence of that phrase
@@ -198,11 +198,25 @@ that a censor is manually combing through search engines to find
 sensitive websites, the website could have been blocked because it
 contained totally different content.
 
-Nevertheless, there seems to be some correlation for both bigrams and
-trigrams. Table~\ref{effective-bigrams} shows a sample of bigrams
+Nevertheless, there seems to be some correlation for certain
+phrases. Table~\ref{effective-unigrams} shows a sample of unigrams
 that returned the most number of unique filtered domains from
-Bing. There are a couple of things to note. First, most of the bigrams
-refer to the Chinese Communist Party in some
+Bing. For example, the top four unigrams--Wang Qishan, Li Hongzhi, Guo
+Boxiong, and Hu Jintao--are the names of controversial figures in
+Chinese history. Li Hongzhi is the leader of the Falun Gong spiritual
+movement, whose practicioners have been subject to persecution and
+censorship by the Chinese government since
+1999~\cite{freedomhouse:falun}. Similarly, Guo Boxiong is a former top
+official of the Chinese military that was sentenced to life in
+prison in 2016 for accepting bribes, according to the Chinese
+government~\cite{guardian:guo}. Thus, if a Chinese website discusses
+these people, the website may become censored for containing
+``sensitive'' content.
+
+There are also bigrams that correlate with a large percentage of
+censored domains, but they are more expicitly political than the
+unigrams. Table~\ref{effective-bigrams} shows this result. First, most
+of the bigrams refer to the Chinese Communist Party in some
 way. Phrases such as \begin{CJK*}{UTF8}{gbsn}中共的威胁\end{CJK*}
 (Chinese Communists threaten), \begin{CJK*}{UTF8}{gbsn}江泽民胡锦
 涛\end{CJK*} (Jiang Zemin Hu Jintao), and \begin{CJK*}{UTF8}{gbsn}中国
@@ -215,18 +229,18 @@ political dissent, such as \begin{CJK*}{UTF8}{gbsn}官员呼吁\end{CJK*}
 (Illegal detention), and \begin{CJK*}{UTF8}{gbsn}宣称反共\end{CJK*}
 (Declared anti-communist).
 
-Table~\ref{effective-trigrams} shows a sample of trigrams
-that returned the most number of unique filtered domains from
-Bing. Phrases that stand out include \begin{CJK*}{UTF8}{gbsn}中国共产
-党的宗教政策\end{CJK*} (The Chinese Communist Party's religious
-policy), \begin{CJK*}{UTF8}{gbsn}天安门广场示威\end{CJK*} (Tiananmen
-Square demonstrations), \begin{CJK*}{UTF8}{gbsn}1989年民主运
-动\end{CJK*} (1989 democracy movement), and \begin{CJK*}{UTF8}{gbsn}采
-取暴力镇压\end{CJK*} (To take a violent crackdown). Interstingly, we
-also see that discussion of China's religious
-policy, the ``New Tang Dynasty''--a religious radio broadcast located in
-the United States--, and European Union legislation may also be
-considered sensitive content.~\cite{china-religion}. \textit{Together,
-these results suggest that references to collective political
-dissent are highly likely to be censored}. This
-is consistent with the findings of King et al.~\cite{king2013censorship}.
+We see a similar result with trigrams, as shown by
+Table~\ref{effective-trigrams}. Phrases that stand out
+include \begin{CJK*}{UTF8}{gbsn}中国共产党的宗教政策\end{CJK*} (The
+Chinese Communist Party's religious policy), \begin{CJK*}{UTF8}{gbsn}
+天安门广场示威\end{CJK*} (Tiananmen Square
+demonstrations), \begin{CJK*}{UTF8}{gbsn}1989年民主运动\end{CJK*}
+(1989 democracy movement), and \begin{CJK*}{UTF8}{gbsn}采取暴力镇
+压\end{CJK*} (To take a violent crackdown). Interstingly, we also see
+that discussion of China's religious policy, the ``New Tang
+Dynasty''--a religious radio broadcast located in the United States--,
+and European Union legislation may also be considered sensitive
+content.~\cite{china-religion}. \textit{Together, these results
+suggest that references to collective political dissent are highly
+likely to be censored}. This is consistent with the findings of King
+et al.~\cite{king2013censorship}.
