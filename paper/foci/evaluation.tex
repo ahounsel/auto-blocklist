@@ -22,11 +22,12 @@ sending a DNS request to a set of controlled IP addresses in China
 that don't belong to DNS servers. As with FilteredWeb, if we
 received a DNS response, we inferred that the DNS request was
 intercepted, and thus the tested website is
-censored~\cite{darer2017filteredweb}. Finally, we performed two
+censored~\cite{darer2017filteredweb}. Finally, we performed three
 separate evaluations to measure the effectiveness of different phrase
-sizes for finding censored websites. In the first evaluation, we only
-extracted bigrams of words, and in the second one we only extracted
-trigrams.
+sizes for finding censored websites. With each evaluation, we only
+extracted unigrams, bigrams, and trigrams, respectively. We also limited
+each evaluation to 1,000,000 URLs to be consistent with the
+methodology of FilteredWeb.
 
 We also configured the Bing API calls so that any URLs from Blogspot,
 Facebook, Twitter, YouTube, and Tumblr would be ignored. We did this

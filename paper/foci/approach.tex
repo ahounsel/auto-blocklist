@@ -21,16 +21,16 @@ approach beyond the state of the art.
 \subsection{Extracting multi-word phrases}
 An n-gram is a building block for natural-language processing that
 represents a sequence of ``n'' units of text, e.g. words. For example,
-if we were to compute all of the bigrams of words in the English phrase
-[\texttt{Chinese human rights violation}], we'd get \texttt{Chinese
-human}, \texttt{human rights}, and \texttt{rights violation}. Similarly,
-if we were to compute all the trigrams of words, we'd get
-\texttt{Chinese human rights} and \texttt{human rights violation}. On the
-other hand, if we simply extract unigrams from the sentence,
-we'd be left with \texttt{Chinese}, \texttt{human}, \texttt{rights}, and
-\texttt{violation}. As such, we believe that by combining unigrams
-into bigrams and trigrams, we're able to learn more about the subject
-of a webpage.
+if we were to compute all of the bigrams of words in the English
+phrase \texttt{Chinese human rights violation}, we'd get
+\texttt{Chinese human}, \texttt{human rights}, and \texttt{rights
+violation}. Similarly, if we were to compute all the trigrams of
+words, we'd get \texttt{Chinese human rights} and \texttt{human rights
+violation}. On the other hand, if we simply extract unigrams from the
+sentence, we'd be left with \texttt{Chinese}, \texttt{human},
+\texttt{rights}, and \texttt{violation}. As such, we believe that by
+extracting content-rich unigrams, bigrams, trigrams, we're able to
+learn more about the subject of a webpage.
 
 Unfortunately, computing the n-grams of words in Chinese text is
 difficult because it is typically written without spaces, and there is
@@ -47,10 +47,9 @@ character \begin{CJK*}{UTF8}{gbsn}花\end{CJK*} on its own translates
 to ``flower''. Given that we do not have domain-specific knowledge of
 the webpages that we're analyzing, we consider a unigram to be
 whatever the segmenter software in the Stanford CoreNLP library considers to be
-a unigram, even if a Chinese unigram translates to multiple words in
-English~\cite{tseng2005conditional, chang2008optimizing}.
+a unigram.~\cite{tseng2005conditional, chang2008optimizing}.
 
-We believe that using Chinese bigrams and trigrams for search queries
+We believe that using Chinese unigrams, bigrams, and trigrams for search queries
 instead of individual English words is more effective for discovering
 censored websites in China. For example, we know that websites that
 express collective dissent are considered sensitive by the Chinese
@@ -58,8 +57,8 @@ government~\cite{king2013censorship}. If we used the words
 \texttt{destroy}, \texttt{the}, \texttt{Communist}, or \texttt{Party}
 individually as search terms, we might not get websites that express
 collective dissent because the words have been taken out of
-context. On the other hand, the phrase [\texttt{destroy the Communist
-Party}] as a whole expresses collective dissent, which might enable us
+context. On the other hand, the phrase ``\texttt{destroy the Communist
+Party}'' as a whole expresses collective dissent, which might enable us
 to find many censored domains when used as a search term. We evaluate
 the effectiveness of such phrases in Section \ref{phrases-eval}.
 
@@ -67,12 +66,12 @@ the effectiveness of such phrases in Section \ref{phrases-eval}.
 To ``rank'' the phrases on a censored webpage, we use
 term-frequency/inverse document-frequency (TF-IDF). TF-IDF is a
 natural language technique that allows us to determine which phrases
-best characterize a given webpage~\cite{ramos2003using}. It can be thought to work in three
-steps. First, we compute the term-frequency for each phrase on a
-webpage, which means that we count the frequency of each bigram and
-trigram. Then, we compute the document-frequency for each phrase on a
-webpage, which entails searching a Chinese corpus for the frequency of
-a given phrase across all documents in the
+best characterize a given webpage~\cite{ramos2003using}. It can be
+thought to work in three steps. First, we compute the term-frequency
+for each phrase on a webpage, which means that we count the frequency
+of each unigram, bigram and trigram. Then, we compute the document-frequency
+for each phrase on a webpage, which entails searching a Chinese corpus
+for the frequency of a given phrase across all documents in the
 corpus~\cite{phrasefinder}. Finally, we multiply the term frequency by
 the inverse of the document frequency. The resulting score gives us an
 idea of how important a given Chinese phrase is to a webpage.
