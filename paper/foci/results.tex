@@ -108,17 +108,16 @@ as search queries allowed us to uncover a significant number of
 websites that would otherwise be unknown to censorship researchers.
 
 Lastly, Table \ref{breakdown} shows the breakdown of how many censored
-websites we discovered. By using bigrams, we were able to discover 964
-censored domains that are not on any publicly available block list,
-655 of which are outside the Alexa Top 1000. Similarly, by using
-trigrams, we were able to discover 969 domains that are not on any
-publicly available block list, 629 of which are outside the Alexa Top
-1000. In total, we found 1,405 domains, 757 of which are outside of
-the Alexa Top 1000~\cite{alexa:top1000}. Each of these evaluations
-were performed with 1,000,000 unique URLs, consistent with the
-methodology of FilteredWeb~\cite{darer2017filteredweb}. Figure \ref{censored-vs-urls} shows how
-many censored domains we discovered as a function of unique URLs
-crawled for each evaluation.
+websites we discovered. By using unigrams, we were able to discover
+765 domains that are not on any publicly available block list. By
+using bigrams, we were able to discover 655 censored domains. Lastly,
+by using trigrams, we were able to discover 629 censored domains. In
+total, we discovered 1125 censored domains, none of which are on the
+Alexa Top 1000~\cite{alexa:top1000}. Each of these evaluations were
+performed with 1,000,000 unique URLs, consistent with the methodology
+of FilteredWeb~\cite{darer2017filteredweb}. Figure
+\ref{censored-vs-urls} shows how many censored domains we discovered
+as a function of unique URLs crawled for each evaluation.
 
 \begin{table*}[t]
   \begin{center}
