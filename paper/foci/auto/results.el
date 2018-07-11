@@ -6,6 +6,7 @@
     "breakdown"
     "alexa"
     "censored-vs-urls"
+    "effective-unigrams"
     "effective-bigrams"
     "effective-trigrams"
     "phrases-eval"))

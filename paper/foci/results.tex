@@ -21,10 +21,11 @@ section discusses the main findings in depth.
     \scalebox{0.80}{
     \begin{tabular}{ | l | r | r | r | }
       \hline
-      Phrase length & Domains & Domains w/o Top 1k & Tested URLs \\ \hline
-      Bigrams  & 964     & 655                & 1,000,000 \\
-      Trigrams & 969     & 629                & 1,000,000 \\
-      Total & 1,405 & \textbf{757} & 1,946,328  \\ 
+      Phrase length & Domains & Domains w/o Alexa Top 1000 \\ \hline
+      Unigrams      & 1029    & 765 \\
+      Bigrams       & 970     & 655 \\
+      Trigrams      & 975     & 629 \\
+      Total         & 1756    & \textbf{1125} \\
       \hline
     \end{tabular}}
   \end{center}
@@ -114,6 +115,34 @@ were performed with 1,000,000 unique URLs, consistent with the
 methodology of FilteredWeb~\cite{darer2017filteredweb}. Figure \ref{censored-vs-urls} shows how
 many censored domains we discovered as a function of unique URLs
 crawled for each evaluation.
+
+% % [('N/A', 108), ('王歧山', 37), ('李洪志', 32), ('郭伯雄', 31), ('胡
+% 锦涛', 28), ('胡平', 27), ('Morty', 26), ('命案', 26), ('特首', 26),
+% ('Vimeo', 25), ('中情局', 25), ('克里', 25), ('提名', 25), ('Zemin',
+% 24), ('公投', 24), ('垮塌', 24), ('宋楚瑜', 24), ('汪洋', 24), ('胡耀
+% 邦', 24), ('退步', 24), ('Reuters', 23), ('Wenchuan', 23), ('倒塌',
+% 23), ('婆婆', 23), ('核武', 23)]
+
+\begin{table*}[t]
+  \begin{center}
+    \scalebox{0.9}{
+      \begin{tabular}{ l | l | c }
+        Chinese & English & Censored domains \\ \hline
+        \begin{CJK*}{UTF8}{gbsn}王歧山\end{CJK*} & Wang Qishan & 74\% \\
+        \begin{CJK*}{UTF8}{gbsn}李洪志\end{CJK*} & Li Hongzhi & 64\% \\
+        \begin{CJK*}{UTF8}{gbsn}郭伯雄\end{CJK*} & Guo Boxiong & 62\% \\
+        \begin{CJK*}{UTF8}{gbsn}胡锦涛\end{CJK*} & Hu Jintao & 56\% \\
+        \begin{CJK*}{UTF8}{gbsn}胡平\end{CJK*}  & Hu Ping & 54\% \\
+        \begin{CJK*}{UTF8}{gbsn}Morty\end{CJK*} & Morty & 52\% \\
+        \begin{CJK*}{UTF8}{gbsn}命案\end{CJK*}  & Homicide & 52\% \\
+        \begin{CJK*}{UTF8}{gbsn}特首\end{CJK*}  & Chief executive & 52\% \\
+        \begin{CJK*}{UTF8}{gbsn}Vimeo\end{CJK*} & Vimeo & 50\% \\
+        \begin{CJK*}{UTF8}{gbsn}中情局\end{CJK*} & CIA & 50\% \\
+      \end{tabular}}
+  \end{center}
+  \caption{\label{effective-unigrams}Sample of unigrams with
+    significant blockrates}
+\end{table*}
 
 \begin{table*}[t]
   \begin{center}
