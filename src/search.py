@@ -22,8 +22,8 @@ from results import *
 DB_NAME = 'db/unigrams.db'
 KEYS = 'KEYS'
 
-THREADS = 32
-PROCESSES = 32
+THREADS = 4
+PROCESSES = 4
 
 url_queue = multiprocessing.Queue()
 tag_queue = multiprocessing.Queue()
@@ -370,8 +370,12 @@ def find_censored_urls(keys):
 
 
 if __name__ == "__main__":
-    keys = read_keys(KEYS)
-    start = time.time()
-    find_censored_urls(keys)
-    end = time.time()
-    print(end - start)
+    # keys = read_keys(KEYS)
+    # start = time.time()
+    # find_censored_urls(keys)
+    # end = time.time()
+    # print(end - start)
+
+    grams = fetch_grams('http://tiananmenmother.org')
+    trigram_tags = tf_idf(grams[2], 3)
+    print(trigram_tags)

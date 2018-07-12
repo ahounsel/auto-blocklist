@@ -55,10 +55,10 @@ news that relies heavily on anonymous submissions. The owners of the
 website note that ``Boxun often reports news that authorities do not
 tell the public, such as outbreaks of diseases, human rights
 violations, corruption scandals and disasters''~\cite{boxun-about}. As
-such, the censorship of these websites might reflect China's domestic
-and foreign policy.
+such, the censorship of these websites might reflect the Chinese
+government's policy of information control.
 
-Finally, only three of the top 25 domains that we discovered are in
+Furthermore, only three of the top 25 domains that we discovered are in
 the top 50 domain list produced by FilteredWeb. Four of the top five
 domains that we discovered--\texttt{ntdtv.com},
 \texttt{storm.mg}, \texttt{cn.shafaqna.com}, and
@@ -68,6 +68,27 @@ approach of FilteredWeb, we were able to produce a qualitatively
 different block list}. We recommend putting these two block lists
 together to create a single block list that is both wide in scope and
 large in size.
+
+Intuitively, we were able to find hundreds of qualitatively
+differenced censored domains than those found by FilteredWeb because
+we could extract Chinese-specific topics from webpages. We were able
+to do so by using TF-IDF with a Chinese corpus to rank the
+``uniqueness'' of Chinese phrases that appeared on a given
+webpage. For example, the trigram
+\begin{CJK*}{UTF8}{gbsn}仅 限于 书面\end{CJK*} (``only written'') was poorly ranked on
+\texttt{tianenmenmother.org}--a Chinese democratic activist group--
+because although it appears frequently, it's a common phrase in
+Chinese, according to the Chinese corpus on
+PhraseFinder~\cite{phrasefinder}. On the other hand, the
+trigram \begin{CJK*}{UTF8}{gbsn}自由 亚洲 电台\end{CJK*} (``Radio Free
+Asia'') was highly ranked because it didn't appear frequently, and
+it's an uncommon phrase in Chinese. It should also be noted that Radio
+Free Asia is a broadcasting corporation whose stated mission is to
+``provide accurate and timely news and information to Asian countries
+whose governments prohibit access to a free
+press''~\cite{rfa:about}. Thus, by scoring Chinese phrases with TF-IDF
+against a Chinese corpus, we were able to determine which phrases are
+``content-rich'' on a given webpage.
 
 \begin{figure*}[t]
   \centering
@@ -82,7 +103,6 @@ large in size.
 \end{figure}
 
 \subsection{China blocks many unpopular websites}
-
 Figure~\ref{alexa} shows the ranking of the websites we discovered on
 the Alexa Top 1,000,000. Notably, many of the websites we discovered
 are spread throughout the tail of the list, and some of the websites
