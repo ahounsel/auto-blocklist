@@ -1,16 +1,21 @@
 
 \section{Introduction} 
 
-Internet censorship is pervasive in China. Topics ranging from political
-dissent and religious assembly to privacy-enhancing technologies are known to
-be censored. Naturally, the list of sites that are filtered are not
-public~\cite{fhouse:china}. When performing measurements of Internet
-filtering, the inability to know what sites are blocked creates a circular
-problem of discovering the sites to measure in the first place. To do so, various
-third parties currently curate
-lists of websites that are known to be censored, or ``block lists''. These
-lists are used to both understand {what} content is censored in China and
-how that censorship is implemented.
+Internet censorship is pervasive in China. Topics ranging from
+political dissent and religious assembly to privacy-enhancing
+technologies are known to be
+censored~\cite{citizenlab:block}. However, the Chinese government has
+not released a complete list of websites that they have
+filtered.~\cite{fhouse:china}. When performing measurements of
+Internet filtering, then, the inability to know what sites are blocked
+creates a circular problem of discovering the sites to measure in the
+first place. To do so, various third parties currently curate lists of
+websites that are known to be censored, or ``block lists''. These
+lists are used to both understand {what} content is censored in China
+and how that censorship is implemented. Indeed, the Open Observatory
+of Network Interference notes that ``censorship findings are only as
+interesting as the sites and services that you
+test.''~\cite{ooni:lists}.
 
 Instead of curating a block list by hand, Darer et al. proposed a
 system called FilteredWeb that automatically discovers webpages that

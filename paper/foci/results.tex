@@ -73,6 +73,22 @@ press''~\cite{rfa:about}. Thus, by scoring Chinese phrases with TF-IDF
 against a Chinese corpus, we were able to determine which phrases are
 ``content-rich'' on a given webpage.
 
+\begin{table}[b]
+  \begin{center}
+    \scalebox{0.80}{
+    \begin{tabular}{ | l | r | r | r | }
+      \hline
+      Phrase length & Domains & Domains w/o Alexa Top 1000 \\ \hline
+      Unigrams      & 1029    & 765 \\
+      Bigrams       & 970     & 655 \\
+      Trigrams      & 975     & 629 \\
+      Total         & 1756    & \textbf{1125} \\
+      \hline
+    \end{tabular}}
+  \end{center}
+\caption{\label{breakdown} Total number of censored domains discovered.}
+\end{table}
+
 \subsection{China blocks many unpopular websites}
 Figure~\ref{alexa} shows the ranking of the websites we discovered on
 the Alexa Top 1,000,000. Notably, many of the websites we discovered

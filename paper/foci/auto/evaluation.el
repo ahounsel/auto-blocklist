@@ -2,7 +2,6 @@
  "evaluation"
  (lambda ()
    (LaTeX-add-labels
-    "breakdown"
     "top-domains"))
  :latex)
 

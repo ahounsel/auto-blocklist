@@ -60,6 +60,7 @@
     "boxun-about"
     "freedomhouse:falun"
     "guardian:guo"
-    "rfa:about"))
+    "rfa:about"
+    "ooni:lists"))
  :bibtex)
 
