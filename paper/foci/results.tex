@@ -11,11 +11,11 @@ censored websites that are not present on existing block
 lists. Furthermore, we noticed that many websites on our block list
 receive very little traffic. Lastly, we found that by using
 politically-charged phrases as search terms, we were able to find a
-disproportionally large amount of censored websites. The rest of this
+disproportionately large amount of censored websites. The rest of this
 section discusses the main findings in depth.
 
 \subsection{Existing blocklists are incomplete}
-\textit{By using natural-language processing on Chinese webpages, we
+\textit{By using natural-language processing on Chinese web pages, we
 were able to discover hundreds of censored websites that are not
 present on the Citizen Lab block list--the standard for censorship
 measurements--and FilteredWeb's block list~\cite{darer2017filteredweb,
@@ -27,7 +27,7 @@ to mainly cover Chinese human rights issues, news, censorship
 circumvention, and more.
 
 For instance, \texttt{wiki.zhtube.com} appears to be a Chinese
-Wikipedia mirror. The webpage for \texttt{zhtube.com} seems to be the
+Wikipedia mirror. The web page for \texttt{zhtube.com} seems to be the
 default page for a Chinese LNMP (Linux, NginX MySQL, PhP) installation
 on a virtual private server~\cite{lnmp}. We found over 3000 URLs in
 our dataset that point to this website, which suggests that many
@@ -53,11 +53,11 @@ together to create a single block list that is both wide in scope and
 large in size.
 
 Intuitively, we were able to find hundreds of qualitatively
-differenced censored domains than those found by FilteredWeb because
-we could extract Chinese-specific topics from webpages. We were able
+different censored domains than those found by FilteredWeb because
+we could extract Chinese-specific topics from web pages. We were able
 to do so by using TF-IDF with a Chinese corpus to rank the
 ``uniqueness'' of Chinese phrases that appeared on a given
-webpage. For example, the trigram
+web page. For example, the trigram
 \begin{CJK*}{UTF8}{gbsn}仅 限于 书面\end{CJK*} (``only written'') was poorly ranked on
 \texttt{tianenmenmother.org}--a Chinese democratic activist group--
 because although it appears frequently, it's a common phrase in
@@ -71,7 +71,7 @@ Free Asia is a broadcasting corporation whose stated mission is to
 whose governments prohibit access to a free
 press''~\cite{rfa:about}. Thus, by scoring Chinese phrases with TF-IDF
 against a Chinese corpus, we were able to determine which phrases are
-``content-rich'' on a given webpage.
+``content-rich'' on a given web page.
 
 \begin{table}[b]
   \begin{center}
@@ -99,7 +99,7 @@ infer that censors in China are not just interested in blocking
 ``big-name'', popular websites.} They are actively seeking out websites
 of \textit{any size} that contain ``sensitive'' content. We also
 discovered a number of websites that fall outside the Alexa Top
-1,000,000 altogether. Without the use of an automated systen that can
+1,000,000 altogether. Without the use of an automated system that can
 discover censored websites, it's unlikely that the public would even
 be aware that these websites are blocked.
 
@@ -141,7 +141,7 @@ websites that would otherwise be unknown to censorship researchers.
     significant blockrates}
 \end{table}
 
-Lastly, Table \ref{breakdown} shows the breakdown of how many censored
+Table \ref{breakdown} shows the breakdown of how many censored
 websites we discovered. By using unigrams, we were able to discover
 765 domains that are not on any publicly available block list. By
 using bigrams, we were able to discover 655 censored domains. Lastly,
@@ -188,7 +188,7 @@ as a function of unique URLs crawled for each evaluation.
         \begin{CJK*}{UTF8}{gbsn}欧洲\end{CJK*} \begin{CJK*}{UTF8}{gbsn}议会\end{CJK*} \begin{CJK*}{UTF8}{gbsn}决议\end{CJK*} & European Parliament Resolution & 32\% \\
         \begin{CJK*}{UTF8}{gbsn}新\end{CJK*} \begin{CJK*}{UTF8}{gbsn}唐\end{CJK*} \begin{CJK*}{UTF8}{gbsn}王朝\end{CJK*} & New Tang Dynasty & 32\% \\
         \begin{CJK*}{UTF8}{gbsn}恐怖\end{CJK*} \begin{CJK*}{UTF8}{gbsn}事件\end{CJK*} \begin{CJK*}{UTF8}{gbsn}。\end{CJK*} & A terrorist event. & 32\% \\
-        \begin{CJK*}{UTF8}{gbsn}天安\end{CJK*} \begin{CJK*}{UTF8}{gbsn}门广\end{CJK*} \begin{CJK*}{UTF8}{gbsn}场示威\end{CJK*} & Tiananmen Square Demonstrations & 32\% \\
+        \begin{CJK*}{UTF8}{gbsn}天安\end{CJK*} \begin{CJK*}{UTF8}{gbsn}门广\end{CJK*} \begin{CJK*}{UTF8}{gbsn}场示威\end{CJK*} & Tienanmen Square Demonstrations & 32\% \\
         \begin{CJK*}{UTF8}{gbsn}敦促\end{CJK*} \begin{CJK*}{UTF8}{gbsn}美国\end{CJK*} \begin{CJK*}{UTF8}{gbsn}政府\end{CJK*} & Urging the US government & 32\% \\
         \begin{CJK*}{UTF8}{gbsn}1989\end{CJK*} \begin{CJK*}{UTF8}{gbsn}民主\end{CJK*} \begin{CJK*}{UTF8}{gbsn}运动\end{CJK*} & 1989 democracy movement & 30\% \\
       \end{tabular}}
@@ -217,7 +217,7 @@ that returned the most number of unique filtered domains from
 Bing. For example, the top four unigrams--Wang Qishan, Li Hongzhi, Guo
 Boxiong, and Hu Jintao--are the names of controversial figures in
 Chinese history. Li Hongzhi is the leader of the Falun Gong spiritual
-movement, whose practicioners have been subject to persecution and
+movement, whose practitioners have been subject to persecution and
 censorship by the Chinese government since
 1999~\cite{freedomhouse:falun}. Similarly, Guo Boxiong is a former top
 official of the Chinese military that was sentenced to life in
@@ -227,7 +227,7 @@ these people, the website may become censored for containing
 ``sensitive'' content.
 
 There are also bigrams that correlate with a large percentage of
-censored domains, but they are more expicitly political than the
+censored domains, but they are more explicitly political than the
 unigrams. Table~\ref{effective-bigrams} shows this result. First, most
 of the bigrams refer to the Chinese Communist Party in some
 way. Phrases such as \begin{CJK*}{UTF8}{gbsn}中共的威胁\end{CJK*}
@@ -246,10 +246,10 @@ We see a similar result with trigrams, as shown by
 Table~\ref{effective-trigrams}. Phrases that stand out
 include \begin{CJK*}{UTF8}{gbsn}中国共产党的宗教政策\end{CJK*} (The
 Chinese Communist Party's religious policy), \begin{CJK*}{UTF8}{gbsn}
-天安门广场示威\end{CJK*} (Tiananmen Square
+天安门广场示威\end{CJK*} (Tienanmen Square
 demonstrations), \begin{CJK*}{UTF8}{gbsn}1989年民主运动\end{CJK*}
 (1989 democracy movement), and \begin{CJK*}{UTF8}{gbsn}采取暴力镇
-压\end{CJK*} (To take a violent crackdown). Interstingly, we also see
+压\end{CJK*} (To take a violent crackdown). Interestingly, we also see
 that discussion of China's religious policy, the ``New Tang
 Dynasty''--a religious radio broadcast located in the United States--,
 and European Union legislation may also be considered sensitive

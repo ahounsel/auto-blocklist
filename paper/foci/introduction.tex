@@ -18,20 +18,20 @@ interesting as the sites and services that you
 test.''~\cite{ooni:lists}.
 
 Instead of curating a block list by hand, Darer et al. proposed a
-system called FilteredWeb that automatically discovers webpages that
+system called FilteredWeb that automatically discovers web pages that
 are censored in China~\cite{darer2017filteredweb}. Their approach is
 summarized in the following steps. First, keywords are extracted from
-webpages on the Citizen Lab block list, a small, hand-curated
+web pages on the Citizen Lab block list, a small, hand-curated
 list. These are English words that are ranked through TF-IDF, a
 technique which we describe in Section ~\ref{tf-idf}. Then, each
 keyword is used as a query for a search engine, such as Bing. The
-intuition is that censored webpages contain similar keywords. Finally,
-each webpage that appears in the search results is tested for DNS
+intuition is that censored web pages contain similar keywords. Finally,
+each web page that appears in the search results is tested for DNS
 manipulation in China. These tests are performed by sending DNS
 queries to IP addresses in China that don't belong to DNS servers. If
 a DNS response is received, then, it is inferred that the request was
-intercepted in China, which implies that the website is censored. Each
-webpage that is censored is fed back to the beginning of the
+intercepted in China and that the website is censored. Each
+web page that is censored is fed back to the beginning of the
 system. FilteredWeb discovered 1,355 censored domains, 759 of which
 are outside the Alexa Top 1,000.
 
@@ -39,7 +39,7 @@ In this paper, we build upon the approach of FilteredWeb in the
 following ways. First, {\em we extract content-rich phrases
 for search queries}. In contrast, FilteredWeb only uses single words
 for search queries. These phrases provide greater context regarding
-the subject of censored webpages, which enables us to find websites
+the subject of censored web pages, which enables us to find websites
 that are very closely related to each other. For example, consider the
 phrase \begin{CJK*}{UTF8}{gbsn}中国侵犯人权 \end{CJK*} (Chinese human
 rights violation). When we perform the searches \texttt{Chinese},
@@ -54,7 +54,7 @@ task, as we discuss later.
 
 Second, we use natural language processing to parse Chinese text
 when adding to the blocklist. In contrast, FilteredWeb only extracts English
-words that appear on a webpage. As such, \textit{any website that is written
+words that appear on a web page. As such, \textit{any website that is written
 in simplified Chinese is ignored}, neglecting a significant portion of
 censored sites. For example, there are many censored websites and blogs that
 cover Chinese news and culture, and many of them only contain Chinese text. As
@@ -83,7 +83,7 @@ In this paper, we make the following contributions:
   \item We build upon the approach of FilteredWeb to discover censored
 websites in China that specifically pertain to its culture. We do so
 by extracting potentially sensitive Chinese phrases from censored
-webpages and using them as search terms to find related websites.
+web pages and using them as search terms to find related websites.
   \item We build a list of 1125 censored domains in China, which is
 12.5$\times$ larger than the standard list for censorship
 measurements~\cite{citizenlab:block}. Furthermore, \textit{none of

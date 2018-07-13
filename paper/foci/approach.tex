@@ -9,12 +9,12 @@
 Figure~\ref{arch} summarizes our approach to finding censored
 websites. For the most part, our approach is similar to that of
 FilteredWeb~\cite{darer2017filteredweb}. We start by bootstrapping a
-list of webpages that are known to be censored, such as the Citizen
+list of web pages that are known to be censored, such as the Citizen
 Lab block list~\cite{citizenlab:block}.  Then, we extract Chinese and
-English phrases that characterize these webpages.  Then, we use these
-phrases as search queries to find related webpages that might also be
+English phrases that characterize these web pages.  Then, we use these
+phrases as search queries to find related web pages that might also be
 censored. Finally, we test each search result for DNS manipulation in
-China and feed the censored webpages back to the beginning of the
+China and feed the censored web pages back to the beginning of the
 system. The rest of this section details the new capabilities of our
 approach beyond the state of the art.
 
@@ -30,7 +30,7 @@ violation}. On the other hand, if we simply extract unigrams from the
 sentence, we'd be left with \texttt{Chinese}, \texttt{human},
 \texttt{rights}, and \texttt{violation}. As such, we believe that by
 extracting content-rich unigrams, bigrams, trigrams, we're able to
-learn more about the subject of a webpage.
+learn more about the subject of a web page.
 
 Unfortunately, computing the n-grams of words in Chinese text is
 difficult because it is typically written without spaces, and there is
@@ -45,7 +45,7 @@ Chinese unigram that translates to
 天\end{CJK*} on its own translates to ``sky'', and the
 character \begin{CJK*}{UTF8}{gbsn}花\end{CJK*} on its own translates
 to ``flower''. Given that we do not have domain-specific knowledge of
-the webpages that we're analyzing, we consider a unigram to be
+the web pages that we're analyzing, we consider a unigram to be
 whatever the segmenter software in the Stanford CoreNLP library considers to be
 a unigram.~\cite{tseng2005conditional, chang2008optimizing}.
 
@@ -63,18 +63,18 @@ to find many censored domains when used as a search term. We evaluate
 the effectiveness of such phrases in Section \ref{phrases-eval}.
 
 \subsection{Ranking phrases} \label{tf-idf}
-To ``rank'' the phrases on a censored webpage, we use
+To ``rank'' the phrases on a censored web page, we use
 term-frequency/inverse document-frequency (TF-IDF). TF-IDF is a
 natural language technique that allows us to determine which phrases
-best characterize a given webpage~\cite{ramos2003using}. It can be
+best characterize a given web page~\cite{ramos2003using}. It can be
 thought to work in three steps. First, we compute the term-frequency
-for each phrase on a webpage, which means that we count the frequency
+for each phrase on a web page, which means that we count the frequency
 of each unigram, bigram and trigram. Then, we compute the document-frequency
-for each phrase on a webpage, which entails searching a Chinese corpus
+for each phrase on a web page, which entails searching a Chinese corpus
 for the frequency of a given phrase across all documents in the
 corpus~\cite{phrasefinder}. Finally, we multiply the term frequency by
 the inverse of the document frequency. The resulting score gives us an
-idea of how important a given Chinese phrase is to a webpage.
+idea of how important a given Chinese phrase is to a web page.
 
 Using this method, phrases like \begin{CJK*}{UTF8}{gbsn}1989年民主运
 动\end{CJK*} [\texttt{1989 democracy movement}]
@@ -86,25 +86,25 @@ censored. If we find a lot of censored URLs as a result, then we can
 infer that the topic covered by that phrase is considered sensitive in China.
 
 \subsection{Parsing Chinese text}
-Before we can compute TF-IDF for a given webpage, we need to tokenize the
+Before we can compute TF-IDF for a given web page, we need to tokenize the
 text. Doing so is simple enough for English because each word is separated by a
 space. For languages such as Chinese, however, all of the words in a sentence are
 concatenated, without any spaces between them. As such, we need to apply
 natural-language processing techniques to perform fine-grained analysis
-of the text on a webpage.
+of the text on a web page.
 
 To do so, we make use of Stanford CoreNLP, a set of natural language
 processing tools that operate on text for English, Arabic, Chinese, French,
-German, and Spanish~\cite{corenlp2016suite}. For Chinese webpages, it allows us
+German, and Spanish~\cite{corenlp2016suite}. For Chinese web pages, it allows us
 split a sentence into a sequence of unigrams, each of which may represent
 one word or even multiple words. By combining neighboring unigrams, then, we
-can extract key phrases from a webpage that describe its content.
+can extract key phrases from a web page that describe its content.
 
-As previously mentioned, although FilteredWeb is concerned with finding webpages
+As previously mentioned, although FilteredWeb is concerned with finding web pages
 that are censored in China, it is only able to parse text for the ISO basic
 Latin alphabet~\cite{darer2017filteredweb}. By being able to parse Chinese text as
-well as ISO Latin text, then, we are able to cover many more webpages and
-extract regional information that may explain why a given webpage is
+well as ISO Latin text, then, we are able to cover many more web pages and
+extract regional information that may explain why a given web page is
 censored. In future work, we could make use of more intricate tools
 from Stanford CoreNLP likes its part-of-speech tagger to identify
 phrases that convey relevant information.
