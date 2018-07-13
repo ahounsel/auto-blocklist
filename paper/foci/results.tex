@@ -9,29 +9,6 @@ disproportionally large amount of censored websites. The rest of this
 section discusses the main findings in depth.
 
 \subsection{Existing blocklists are incomplete}
-
-\begin{figure*}[t]
-  \centering
-  \includegraphics[scale=0.6]{figures/top-domains}
-  \caption{\label{top-domains}Top censored domains by URL count.}
-\end{figure*}
-
-\begin{table}[b]
-  \begin{center}
-    \scalebox{0.80}{
-    \begin{tabular}{ | l | r | r | r | }
-      \hline
-      Phrase length & Domains & Domains w/o Alexa Top 1000 \\ \hline
-      Unigrams      & 1029    & 765 \\
-      Bigrams       & 970     & 655 \\
-      Trigrams      & 975     & 629 \\
-      Total         & 1756    & \textbf{1125} \\
-      \hline
-    \end{tabular}}
-  \end{center}
-\caption{\label{breakdown} Total number of censored domains discovered.}
-\end{table}
-
 \textit{By using natural-language processing on Chinese webpages, we
 were able to discover hundreds of censored websites that are not
 present on the Citizen Lab block list--the standard for censorship
@@ -90,17 +67,11 @@ press''~\cite{rfa:about}. Thus, by scoring Chinese phrases with TF-IDF
 against a Chinese corpus, we were able to determine which phrases are
 ``content-rich'' on a given webpage.
 
-\begin{figure*}[t]
+\begin{figure*}[htb]
   \centering
   \includegraphics[scale=0.6]{figures/alexa}
   \caption{\label{alexa}Ranking of censored websites on Alexa Top 1 Million.}
 \end{figure*}
-
-\begin{figure}[b]
-  \centering
-  \includegraphics[scale=0.5]{figures/urls-crawled}
-  \caption{\label{censored-vs-urls} Censored domains discovered over unique URLs crawled. }
-\end{figure}
 
 \subsection{China blocks many unpopular websites}
 Figure~\ref{alexa} shows the ranking of the websites we discovered on
@@ -127,6 +98,12 @@ we discovered far more domains that fall outside of the Alexa Top
 as search queries allowed us to uncover a significant number of
 websites that would otherwise be unknown to censorship researchers.
 
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=0.5]{figures/urls-crawled}
+  \caption{\label{censored-vs-urls} Censored domains discovered over unique URLs crawled. }
+\end{figure}
+
 Lastly, Table \ref{breakdown} shows the breakdown of how many censored
 websites we discovered. By using unigrams, we were able to discover
 765 domains that are not on any publicly available block list. By
@@ -139,7 +116,7 @@ of FilteredWeb~\cite{darer2017filteredweb}. Figure
 \ref{censored-vs-urls} shows how many censored domains we discovered
 as a function of unique URLs crawled for each evaluation.
 
-\begin{table*}[t]
+\begin{table*}[htb]
   \begin{center}
     \scalebox{0.9}{
       \begin{tabular}{ l | l | c }
