@@ -1,6 +1,7 @@
 import sys
 import heapq
 import csv
+import json
 import sqlite3
 import matplotlib
 import numpy as np
@@ -80,9 +81,9 @@ def make_fig():
     pyplot.bar(x + 0.44, trigrams[1:], 0.22, label='Trigrams')
     pyplot.xlabel('Position in Alexa Top 1 Million', labelpad=10) 
     pyplot.ylabel('Count')
-    pyplot.legend(loc='upper right', prop={'size': 8})
+    pyplot.legend(loc='upper right', prop={'size': 9})
     pyplot.xticks(x + 0.22, xticks, rotation='45')
-    pyplot.tick_params(axis='x', which='major', labelsize=7)
+    pyplot.tick_params(axis='x', which='major', labelsize=9)
     pyplot.subplots_adjust(bottom=0.2)
     pyplot.savefig('alexa.png')
     

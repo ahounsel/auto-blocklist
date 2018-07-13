@@ -57,7 +57,7 @@ def make_fig():
     # bigram_data = get_data('bigrams.db')
     # trigram_data = get_data('trigrams.db')
     # all_data = Counter(unigram_data) + Counter(bigram_data) + Counter(trigram_data)
-    # json.dump(all_data, open('figures/top_domains.json','w'))    
+    # json.dump(all_data, open('figures/top_domains.json','w'))
     all_data = json.load(open('top-domains.json'))
     all_data = dict(heapq.nlargest(25, all_data.items(), key=itemgetter(1)))
     print(all_data)
