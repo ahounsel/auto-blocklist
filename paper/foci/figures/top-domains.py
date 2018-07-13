@@ -1,4 +1,5 @@
 import heapq
+import json
 import csv
 import sqlite3
 import matplotlib
@@ -52,11 +53,14 @@ def get_data(db):
 
 def make_fig():
     # Get the top 25 domains across unigrams, bigrams, and trigrams, sorted
-    unigram_data = get_data('unigrams.db')
-    bigram_data = get_data('bigrams.db')
-    trigram_data = get_data('trigrams.db')
-    all_data = Counter(unigram_data) + Counter(bigram_data) + Counter(trigram_data)
+    # unigram_data = get_data('unigrams.db')
+    # bigram_data = get_data('bigrams.db')
+    # trigram_data = get_data('trigrams.db')
+    # all_data = Counter(unigram_data) + Counter(bigram_data) + Counter(trigram_data)
+    # json.dump(all_data, open('figures/top_domains.json','w'))    
+    all_data = json.load(open('top-domains.json'))
     all_data = dict(heapq.nlargest(25, all_data.items(), key=itemgetter(1)))
+    print(all_data)
 
     # Make a bar plot
     domains = list(all_data.keys())
@@ -65,9 +69,9 @@ def make_fig():
     pyplot.figure(figsize=(10,5))
     pyplot.bar(y_pos, counts)
     pyplot.ylabel('Filtered URLs')
-    pyplot.xticks(y_pos, domains, rotation=55, ha='right')
+    pyplot.xticks(y_pos, domains, rotation=45, ha='right')
     pyplot.subplots_adjust(bottom=0.25)
-    pyplot.tick_params(axis='x', which='major', labelsize=8)
+    pyplot.tick_params(axis='x', which='major', labelsize=9)
     pyplot.savefig('top-domains.png')
     
 
