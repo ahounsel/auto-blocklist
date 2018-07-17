@@ -61,6 +61,9 @@
     "freedomhouse:falun"
     "guardian:guo"
     "rfa:about"
-    "ooni:lists"))
+    "ooni:lists"
+    "levis2012collateral"
+    "lowe2007great"
+    "google:translate"))
  :bibtex)
 

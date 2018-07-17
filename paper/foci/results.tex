@@ -19,34 +19,26 @@ section discusses the main findings in depth.
 were able to discover hundreds of censored websites that are not
 present on the Citizen Lab block list--the standard for censorship
 measurements--and FilteredWeb's block list~\cite{darer2017filteredweb,
-citizenlab:block}}. Furthermore, the set of websites that appeared the
-most in our search results is almost entirely different from that of
-FilteredWeb. Figure~\ref{top-domains} breaks down this result when
-using unigrams, bigrams, and trigrams as search queries. These websites seem
-to mainly cover Chinese human rights issues, news, censorship
-circumvention, and more.
+citizenlab:block}}. Furthermore, only 3 of the top 50 censored domains
+that appeared in our search results are in the top 50 censored domains
+found by FilteredWeb. Figure~\ref{top-domains} breaks down the URL
+count for the top 25 censored domains that we discovered. These
+websites seem to mainly cover Chinese human rights issues, news,
+censorship circumvention, and more.
 
 For instance, \texttt{wiki.zhtube.com} appears to be a Chinese
 Wikipedia mirror. The web page for \texttt{zhtube.com} seems to be the
 default page for a Chinese LNMP (Linux, NginX MySQL, PhP) installation
 on a virtual private server~\cite{lnmp}. We found over 3000 URLs in
-our dataset that point to this website, which suggests that many
-Chinese websites are trying to circumvent the on-and-off censorship of
+our dataset that point to this website, which may suggest that Chinese
+websites are trying to circumvent the on-and-off censorship of
 Wikipedia in China~\cite{wikipedia-china}. Furthermore,
 \texttt{blog.boxun.com} is a United States-based outlet for Chinese
 news that relies heavily on anonymous submissions. The owners of the
 website note that ``Boxun often reports news that authorities do not
 tell the public, such as outbreaks of diseases, human rights
-violations, corruption scandals and disasters''~\cite{boxun-about}. As
-such, the censorship of these websites might reflect the Chinese
-government's policy of information control.
-
-Furthermore, only three of the top 25 domains that we discovered are in
-the top 50 domain list produced by FilteredWeb. Four of the top five
-domains that we discovered--\texttt{ntdtv.com},
-\texttt{storm.mg}, \texttt{cn.shafaqna.com}, and
-\texttt{thenewslens.com}--are non-Western media websites that cover
-Chinese news. \textit{Thus, by building on the
+violations, corruption scandals and
+disasters''~\cite{boxun-about}. \textit{Thus, by building on the
 approach of FilteredWeb, we were able to produce a qualitatively
 different block list}. We recommend putting these two block lists
 together to create a single block list that is both wide in scope and
@@ -59,7 +51,7 @@ to do so by using TF-IDF with a Chinese corpus to rank the
 ``uniqueness'' of Chinese phrases that appeared on a given
 web page. For example, the trigram
 \begin{CJK*}{UTF8}{gbsn}仅 限于 书面\end{CJK*} (``only written'') was poorly ranked on
-\texttt{tianenmenmother.org}--a Chinese democratic activist group--
+\texttt{tiananmenmother.org}--a Chinese democratic activist group--
 because although it appears frequently, it's a common phrase in
 Chinese, according to the Chinese corpus on
 PhraseFinder~\cite{phrasefinder}. On the other hand, the
@@ -102,17 +94,6 @@ discovered a number of websites that fall outside the Alexa Top
 1,000,000 altogether. Without the use of an automated system that can
 discover censored websites, it's unlikely that the public would even
 be aware that these websites are blocked.
-
-Furthermore, we were able to consistently discover \textit{more} unpopular
-censored domains with our approach than FilteredWeb. For domains that
-rank between 200,000 and 300,000 on the Alexa Top 1,000,000,
-FilteredWeb was able to discover more domains, but in every other bin of
-100,000 ranks we discovered more. Notably, between the ranks of 900,000
-and 1,000,000, FilteredWeb did not discover \textit{any} censored domains, and
-we discovered far more domains that fall outside of the Alexa Top
-1,000,000 altogether. This suggests that the use of Chinese phrases
-as search queries allowed us to uncover a significant number of
-websites that would otherwise be unknown to censorship researchers.
 
 \begin{figure}[t]
   \centering

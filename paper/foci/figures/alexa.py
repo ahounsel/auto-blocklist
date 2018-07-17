@@ -67,9 +67,10 @@ def get_filteredweb_data():
 
 
 def make_fig():
-    unigrams = get_my_data('unigrams.db')    
+    unigrams = get_my_data('unigrams.db')
     bigrams = get_my_data('bigrams.db')
     trigrams = get_my_data('trigrams.db')
+    filteredweb = get_filteredweb_data()    
     pyplot.figure(figsize=(10,5))
     x = np.arange(10)
     xticks = ("100k-200k", "200k-300k",

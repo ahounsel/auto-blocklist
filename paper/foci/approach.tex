@@ -39,15 +39,17 @@ such boundaries in natural-language processing tasks is often
 probabilistic, and depending on where characters are separated, one
 can arrive at very different meanings for a given
 phrase~\cite{stanford:segmenter}. For example, consider the
-text \begin{CJK*}{UTF8}{gbsn}天花\end{CJK*}. This is considered a
-Chinese unigram that translates to
-``smallpox'' in English, but the character \begin{CJK*}{UTF8}{gbsn}
-天\end{CJK*} on its own translates to ``sky'', and the
-character \begin{CJK*}{UTF8}{gbsn}花\end{CJK*} on its own translates
-to ``flower''. Given that we do not have domain-specific knowledge of
-the web pages that we're analyzing, we consider a unigram to be
-whatever the segmenter software in the Stanford CoreNLP library considers to be
-a unigram.~\cite{tseng2005conditional, chang2008optimizing}.
+text \begin{CJK*}{UTF8}{gbsn}特首\end{CJK*}. This is considered a
+Chinese unigram that translates to ``chief executive'' in English, but
+the character \begin{CJK*}{UTF8}{gbsn}特
+\end{CJK*} on its own translates to ``special'', and the
+character \begin{CJK*}{UTF8}{gbsn}首\end{CJK*} on its own translates
+to ``first''~\cite{google:translate}. Given that we do not have
+domain-specific knowledge of the web pages that we're analyzing, we
+consider a unigram to be whatever the segmenter software in the
+Stanford CoreNLP library considers to be a unigram, even if the output
+consists of multiple English words.~\cite{tseng2005conditional,
+chang2008optimizing}.
 
 We believe that using Chinese unigrams, bigrams, and trigrams for search queries
 instead of individual English words is more effective for discovering

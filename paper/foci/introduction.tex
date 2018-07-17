@@ -25,15 +25,16 @@ web pages on the Citizen Lab block list, a small, hand-curated
 list. These are English words that are ranked through TF-IDF, a
 technique which we describe in Section ~\ref{tf-idf}. Then, each
 keyword is used as a query for a search engine, such as Bing. The
-intuition is that censored web pages contain similar keywords. Finally,
-each web page that appears in the search results is tested for DNS
-manipulation in China. These tests are performed by sending DNS
-queries to IP addresses in China that don't belong to DNS servers. If
-a DNS response is received, then, it is inferred that the request was
-intercepted in China and that the website is censored. Each
-web page that is censored is fed back to the beginning of the
-system. FilteredWeb discovered 1,355 censored domains, 759 of which
-are outside the Alexa Top 1,000.
+intuition is that censored web pages contain similar
+keywords. Finally, each web page that appears in the search results is
+tested for DNS manipulation in China. These tests are performed by
+sending DNS queries to IP addresses in China that don't belong to DNS
+servers. If a DNS response is received, then, it is inferred that the
+request was intercepted in China and that the website is
+censored~\cite{darer2017filteredweb, lowe2007great,
+levis2012collateral}. Each web page that is censored is fed back to
+the beginning of the system. FilteredWeb discovered 1,355 censored
+domains, 759 of which are outside the Alexa Top 1,000.
 
 In this paper, we build upon the approach of FilteredWeb in the
 following ways. First, {\em we extract content-rich phrases
