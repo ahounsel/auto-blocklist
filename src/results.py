@@ -82,7 +82,7 @@ def compare_results(db):
     my_results = set(get_results(db, 1000000))
     with open(BASE_DIR + 'lists/filteredweb.txt', 'r') as f:
         filteredweb_results = set(f.read().splitlines())
-    difference = sorted(my_results - filteredweb_results)
+    difference = set(sorted(my_results - filteredweb_results))
         
     print(db)
     print('# of censored domains found by CensorSearch (w/o Top 1000):', len(my_results))
@@ -93,10 +93,10 @@ def compare_results(db):
 
      
 if __name__ == "__main__":
-    unigram_results = sorted(compare_results('unigrams.db'))
-    bigram_results = sorted(compare_results('bigrams.db'))
-    trigram_results = sorted(compare_results('trigrams.db'))
-    total_results = sorted(set(unigram_results) | set(bigram_results) | set(trigram_results))
+    unigram_results = set(sorted(compare_results('unigrams.db')))
+    bigram_results = set(sorted(compare_results('bigrams.db')))
+    trigram_results = set(sorted(compare_results('trigrams.db')))
+    total_results = sorted(unigram_results | bigram_results | trigram_results)
     print('Total # of censored domains discovered:', len(total_results))
 
     with open('unigram_list.txt', 'w') as blocklist:

@@ -70,10 +70,10 @@ against a Chinese corpus, we were able to determine which phrases are
     \scalebox{0.80}{
     \begin{tabular}{ | l | r | r | r | }
       \hline
-      Phrase length & Domains & Domains w/o Alexa Top 1000 \\ \hline
-      Unigrams      & 1029    & 765 \\
-      Bigrams       & 970     & 655 \\
-      Trigrams      & 975     & 629 \\
+      Phrase length & All censored domains & New censored domains \\ \hline
+      Unigrams      & 1029    & 719 \\
+      Bigrams       & 970     & 598 \\
+      Trigrams      & 975     & 579 \\
       Total         & 1756    & \textbf{1125} \\
       \hline
     \end{tabular}}
@@ -124,13 +124,15 @@ be aware that these websites are blocked.
 
 Table \ref{breakdown} shows the breakdown of how many censored
 websites we discovered. By using unigrams, we were able to discover
-765 domains that are not on any publicly available block list. By
-using bigrams, we were able to discover 655 censored domains. Lastly,
-by using trigrams, we were able to discover 629 censored domains. In
+719 domains that are not on any publicly available block list. By
+using bigrams, we were able to discover 598 censored domains. Lastly,
+by using trigrams, we were able to discover 579 censored domains. In
 total, we discovered 1125 censored domains, none of which are on the
-Alexa Top 1000~\cite{alexa:top1000}. Each of these evaluations were
-performed with 1,000,000 unique URLs, consistent with the methodology
-of FilteredWeb~\cite{darer2017filteredweb}. Figure
+Alexa Top 1000 or Darer et al.'s blocklist~\cite{darer2017filteredweb,
+  alexa:top1000}. Each evaluation found 273
+censored domains in common. Furthermore, each of these evaluations
+were performed with 1,000,000 unique URLs, consistent with the
+methodology of FilteredWeb~\cite{darer2017filteredweb}. Figure
 \ref{censored-vs-urls} shows how many censored domains we discovered
 as a function of unique URLs crawled for each evaluation.
 
