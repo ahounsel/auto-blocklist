@@ -4,7 +4,7 @@ import tldextract
 import sqlite3
 
 
-BASE_DIR = '/Users/ahounsel/git/censor-seeker/'
+BASE_DIR = '/Users/ahounsel/git/auto-blocklist/'
 
 
 def count_new_domains(itr, db):
@@ -51,7 +51,7 @@ def get_results(db, maxRows):
     results = []
     for domain in domains:
         ext = tldextract.extract(domain)
-        cleaned_domain = '.'.join(part for part in ext if part and part != 'www')        
+        cleaned_domain = '.'.join(part for part in ext if part and part != 'www')
         contained = False
         for top_domain in top_1000:
             if top_domain in cleaned_domain:
@@ -91,26 +91,58 @@ def compare_results(db):
     print()
     return difference
 
-     
+
+def compare_to_alexa (blocklist):
+    # Load Alexa Top 1000 domains
+    top_1000 = []
+    i = 0
+    with open (BASE_DIR + 'lists/alexa.csv', 'r') as csvfile:
+        csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        for row in csvreader:
+            if i < 1000:
+                top_1000.append(row[1])
+                i += 1
+            else:
+                break
+
+    blocklist_domains = []
+    with open(blocklist, 'r') as csvfile:
+        csvreader = csv.reader(csvfile) 
+        for row in csvreader:
+            url = row[0]
+            ext = tldextract.extract(url) 
+            domain = '.'.join(part for part in ext if part and part != 'www')
+            blocklist_domains.append(domain)
+
+    count = 0
+    for blocked_domain in blocklist_domains:
+        if blocked_domain in top_1000 or 'blogspot' in blocked_domain or 'wordpress' in blocked_domain or 'tumblr' in blocked_domain:
+            print(blocked_domain)
+            count += 1
+    print(count / len(blocklist_domains))
+        
+
 if __name__ == "__main__":
-    unigram_results = set(sorted(compare_results('unigrams.db')))
-    bigram_results = set(sorted(compare_results('bigrams.db')))
-    trigram_results = set(sorted(compare_results('trigrams.db')))
-    total_results = sorted(unigram_results | bigram_results | trigram_results)
-    print('Total # of censored domains discovered:', len(total_results))
+    # unigram_results = set(sorted(compare_results('unigrams.db')))
+    # bigram_results = set(sorted(compare_results('bigrams.db')))
+    # trigram_results = set(sorted(compare_results('trigrams.db')))
+    # total_results = sorted(unigram_results | bigram_results | trigram_results)
+    # print('Total # of censored domains discovered:', len(total_results))
 
-    with open('unigram_list.txt', 'w') as blocklist:
-        for domain in unigram_results:
-            blocklist.write(domain + '\n')
+    # with open('unigram_list.txt', 'w') as blocklist:
+    #     for domain in unigram_results:
+    #         blocklist.write(domain + '\n')
 
-    with open('bigram_list.txt', 'w') as blocklist:
-        for domain in bigram_results:
-            blocklist.write(domain + '\n')
+    # with open('bigram_list.txt', 'w') as blocklist:
+    #     for domain in bigram_results:
+    #         blocklist.write(domain + '\n')
 
-    with open('trigram_list.txt', 'w') as blocklist:
-        for domain in trigram_results:
-            blocklist.write(domain + '\n')
+    # with open('trigram_list.txt', 'w') as blocklist:
+    #     for domain in trigram_results:
+    #         blocklist.write(domain + '\n')
 
-    with open('total_list.txt', 'w') as blocklist:
-        for domain in total_results:
-            blocklist.write(domain + '\n')
+    # with open('total_list.txt', 'w') as blocklist:
+    #     for domain in total_results:
+    #         blocklist.write(domain + '\n')
+
+    compare_to_alexa('../lists/citizenlab-full.csv')
