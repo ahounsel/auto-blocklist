@@ -109,10 +109,11 @@ Pipfile.lock
 *~
 seeds/
 arxiv/
-presentation/
+presentation/img
 iris/
 arxiv.tar
 out.json
 uniq.txt
 filteredweb.txt
 KEYS
+presentation.pdf
