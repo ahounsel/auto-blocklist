@@ -1,2 +1,4 @@
 ## Automatically Generating a Large, Culture-Specific Blocklist for China
-Leveraging Chinese text and search engines to find censored pages
+    Austin Hounsel, Prateek Mittal, Nick Feamster
+    USENIX Workshop on Free and Open Communications on the Internet
+    Baltimore, Maryland. August 2018.
