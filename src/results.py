@@ -123,26 +123,26 @@ def compare_to_alexa (blocklist):
         
 
 if __name__ == "__main__":
-    # unigram_results = set(sorted(compare_results('unigrams.db')))
-    # bigram_results = set(sorted(compare_results('bigrams.db')))
-    # trigram_results = set(sorted(compare_results('trigrams.db')))
-    # total_results = sorted(unigram_results | bigram_results | trigram_results)
-    # print('Total # of censored domains discovered:', len(total_results))
+    unigram_results = set(sorted(compare_results('unigrams.db')))
+    bigram_results = set(sorted(compare_results('bigrams.db')))
+    trigram_results = set(sorted(compare_results('trigrams.db')))
+    total_results = sorted(unigram_results | bigram_results | trigram_results)
+    print('Total # of censored domains discovered:', len(total_results))
 
-    # with open('unigram_list.txt', 'w') as blocklist:
-    #     for domain in unigram_results:
-    #         blocklist.write(domain + '\n')
+    with open('unigram_list.txt', 'w') as blocklist:
+        for domain in unigram_results:
+            blocklist.write(domain + '\n')
 
-    # with open('bigram_list.txt', 'w') as blocklist:
-    #     for domain in bigram_results:
-    #         blocklist.write(domain + '\n')
+    with open('bigram_list.txt', 'w') as blocklist:
+        for domain in bigram_results:
+            blocklist.write(domain + '\n')
 
-    # with open('trigram_list.txt', 'w') as blocklist:
-    #     for domain in trigram_results:
-    #         blocklist.write(domain + '\n')
+    with open('trigram_list.txt', 'w') as blocklist:
+        for domain in trigram_results:
+            blocklist.write(domain + '\n')
 
-    # with open('total_list.txt', 'w') as blocklist:
-    #     for domain in total_results:
-    #         blocklist.write(domain + '\n')
+    with open('total_list.txt', 'w') as blocklist:
+        for domain in total_results:
+            blocklist.write(domain + '\n')
 
-    compare_to_alexa('../lists/citizenlab-full.csv')
+    # compare_to_alexa('../lists/citizenlab-full.csv')
