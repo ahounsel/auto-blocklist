@@ -103,10 +103,7 @@ def is_censored(domain):
     "Determine if a domain is censored in China"
     
     resolver = dns.resolver.Resolver()
-    # resolver.nameservers = ['220.181.57.217', '223.96.100.100', '1.24.10.10',
-    #                         '202.143.16.100', '180.160.10.1', '180.77.100.200',
-    #                         '144.0.111.90', '42.101.0.1']
-    resolver.nameservers = ['220.181.57.218']
+    resolver.nameservers = ''
     resolver.lifetime = 3.0
         
     try:
